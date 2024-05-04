@@ -6,7 +6,7 @@ dotenv.config()
 
 const app = express();
 const API_KEY = process.env.API_KEY
-const PORT = process.env.PORT || 3334
+const PORT = "https://app-movie-backend.vercel.app"
 
 app.use(cors({origin:true}))
 
