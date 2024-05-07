@@ -5,10 +5,10 @@ import './App.css'
 
 function App() {
  
-  const [data, setData] = useState(null)
+  const [data, setData] = useState()
 
   useEffect( () => {
-    fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=ada8bfd2a3b8c2138bffc8c0ffa58212')
+    fetch('/api/movie/2')
     .then(data => data.json())
     .then(res => setData(res))
     .catch(err => console.error(err))

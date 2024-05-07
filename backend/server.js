@@ -13,7 +13,7 @@ app.use(cors({origin:true}))
 const BASE_URL = 'https://api.themoviedb.org/3'
 
 
-app.use('/movie/:movie_id', createProxyMiddleware({
+app.use('/api/movie/:movie_id', createProxyMiddleware({
   target: BASE_URL,
   changeOrigin: true,
   pathRewrite: (path, req) => {
@@ -22,7 +22,7 @@ app.use('/movie/:movie_id', createProxyMiddleware({
   },
 }));
 
-app.use('/genres', createProxyMiddleware({
+app.use('/api/genres', createProxyMiddleware({
   target: BASE_URL,
   changeOrigin: true,
   pathRewrite: (path, req) => {
@@ -31,7 +31,7 @@ app.use('/genres', createProxyMiddleware({
 }));
 
 
-app.use('/movies', createProxyMiddleware({
+app.use('/api/movies', createProxyMiddleware({
   target: BASE_URL,
   changeOrigin: true,
   pathRewrite: (path, req) => {
