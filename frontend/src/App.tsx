@@ -1,41 +1,39 @@
-import {  useEffect, useState } from 'react'
-
-
-import './App.css'
+import { MantineProvider } from '@mantine/core';
+import NavBar from './components/NavBar';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
- 
-  const [data, setData] = useState()
-  const [gentes, setGentes] = useState()
+  // useEffect(() => {
+  //   fetch('/api/movie/2')
+  //     .then(data => data.json())
+  //     .then(res => setData(res))
+  //     .catch(err => console.error(err));
+  // }, []);
 
-  useEffect( () => {
-    fetch('/api/movie/2')
-    .then(data => data.json())
-    .then(res => setData(res))
-    .catch(err => console.error(err))
-  },[])
+  // useEffect(() => {
+  //   fetch('/api/genres')
+  //     .then(data => data.json())
+  //     .then(res => setGentes(res))
+  //     .catch(err => console.error(err));
+  // }, []);
 
-  useEffect( () => {
-    fetch('/api/genres')
-    .then(data => data.json())
-    .then(res => setGentes(res))
-    .catch(err => console.error(err))
-  },[])
+  // useEffect(() => {
+  //   fetch('/api/movies')
+  //     .then(data => data.json())
+  //     .then(res => setGentes(res))
+  //     .catch(err => console.error(err));
+  // }, []);
 
-  useEffect( () => {
-    fetch('/api/movies')
-    .then(data => data.json())
-    .then(res => setGentes(res))
-    .catch(err => console.error(err))
-  },[])
-
-
-  console.log(data)
-  console.log(gentes)
-
-  return(
-    <>ji</>
-  )
+  return (
+    <MantineProvider>
+      <main className="main">
+        <NavBar />
+        <Routes>
+          <Route element={<></>}/>
+      </Routes>
+      </main>
+    </MantineProvider>
+  );
 }
 
-export default App
+export default App;

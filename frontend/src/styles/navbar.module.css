@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 24px 24px;
+  background-color: #F2EBF9;
+  height: 90vh;
+}
+.boxLinks{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+.boxLogo{
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-bottom: 80px;
+  
+}
+
+@media (max-width: 520px) {
+  .navbar { 
+    align-items: center;
+    height: auto;
+  
+  }
+  .boxLogo{
+     margin-bottom: 10px;
+  }
+}
