@@ -6,7 +6,7 @@ dotenv.config()
 
 const app = express();
 const API_KEY = process.env.API_KEY
-const PORT = "https://app-movie-backend.vercel.app"
+const PORT = process.env.PORT || 3334
 
 app.use(cors({origin:true}))
 
@@ -26,7 +26,7 @@ app.use('/api/genres', createProxyMiddleware({
   target: BASE_URL,
   changeOrigin: true,
   pathRewrite: (path, req) => {
-    return `/genre/movie/list?language=en?language=en-US&api_key=${API_KEY}`;
+    return `/genre/movie/list?language=en&api_key=${API_KEY}`;
   },
 }));
 

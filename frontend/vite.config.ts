@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://app-movie-backend.vercel.app',
+        // target: "http://localhost:3334/api/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }
