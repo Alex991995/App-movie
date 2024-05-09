@@ -15,14 +15,12 @@ export const moviesSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: state => {
-      // state.value += 1;
-    },
+   
    
   },
 });
 
-export const { increment, } = moviesSlice.actions;
+export const {  } = moviesSlice.actions;
 
 
 
