@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import {join} from 'path';
 import {createProxyMiddleware} from 'http-proxy-middleware';
 dotenv.config()
 
@@ -30,12 +31,36 @@ app.use('/api/genres', createProxyMiddleware({
   },
 }));
 
+// 
 
 app.use('/api/movies', createProxyMiddleware({
   target: BASE_URL,
   changeOrigin: true,
   pathRewrite: (path, req) => {
-    return `/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${API_KEY}`;
+    // voteLte should be more than voteGte
+    // const voteLte = req.query.vote_average.lte
+    // const voteGte = req.query.vote_average.gte 
+    const voteLte =  req.query.vote_average_lte;
+    const voteGte =  req.query.vote_average_gte;
+    
+    console.log(voteLte)
+    console.log(voteGte)
+    const objQueryParams = {
+      include_adult: 'false',
+      include_video: 'false',
+      language: 'en-US',
+      page: req.query.page || '1',
+      sort_by: 'popularity.desc',
+      api_key: API_KEY,
+      primary_release_year : req.query.primary_release_year || '',
+      with_genres: req.query.with_genres || '',
+      "vote_average.lte":   voteLte || '',
+      "vote_average.gte":  voteGte || '',
+
+    }
+    const searchParams = new URLSearchParams(objQueryParams).toString()
+    // console.log(searchParams)
+    return (`/discover/movie?${searchParams}`)
   },
 }));
 
