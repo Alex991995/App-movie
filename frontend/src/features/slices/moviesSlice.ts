@@ -1,27 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchMovies } from './acyncThunck';
+import type { Root, IMovies, IMoviesSlice } from '../types';
 
-// Define a type for the slice state
-interface IMovies {
-  movies: number;
-}
-
-// Define the initial state using that type
-const initialState: IMovies = {
-  movies: 0,
+const initialState: IMoviesSlice = {
+  movies: undefined,
+  loading: false,
+  error: false,
 };
 
 export const moviesSlice = createSlice({
   name: 'movies',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
-  reducers: {
-   
-   
+
+  selectors: {
+    selectMovies: state => state.movies,
+  },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(fetchMovies.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchMovies.fulfilled, (state, action) => {
+        (state.loading = false), (state.movies = action.payload);
+      })
+      .addCase(fetchMovies.rejected, state => {
+        state.error = true;
+      });
   },
 });
 
-export const {  } = moviesSlice.actions;
-
-
+export const {} = moviesSlice.actions;
+export const { selectMovies } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;

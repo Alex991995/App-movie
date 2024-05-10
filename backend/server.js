@@ -1,75 +1,76 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import {join} from 'path';
-import {createProxyMiddleware} from 'http-proxy-middleware';
-dotenv.config()
+import { join } from 'path';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+dotenv.config();
 
 const app = express();
-const API_KEY = process.env.API_KEY
-const PORT = process.env.PORT || 3334
+const API_KEY = process.env.API_KEY;
+const PORT = process.env.PORT || 3334;
 
-app.use(cors({origin:true}))
+app.use(cors({ origin: true }));
 
-const BASE_URL = 'https://api.themoviedb.org/3'
+const BASE_URL = 'https://api.themoviedb.org/3';
 
+app.use(
+  '/api/movie/:movie_id',
+  createProxyMiddleware({
+    target: BASE_URL,
+    changeOrigin: true,
+    pathRewrite: (path, req) => {
+      const { movie_id } = req.params;
+      return `/movie/${movie_id}?language=en-US&api_key=${API_KEY}`;
+    },
+  }),
+);
 
-app.use('/api/movie/:movie_id', createProxyMiddleware({
-  target: BASE_URL,
-  changeOrigin: true,
-  pathRewrite: (path, req) => {
-    const { movie_id } = req.params;
-    return `/movie/${movie_id}?language=en-US&api_key=${API_KEY}`;
-  },
-}));
+app.use(
+  '/api/genres',
+  createProxyMiddleware({
+    target: BASE_URL,
+    changeOrigin: true,
+    pathRewrite: (path, req) => {
+      return `/genre/movie/list?language=en&api_key=${API_KEY}`;
+    },
+  }),
+);
 
-app.use('/api/genres', createProxyMiddleware({
-  target: BASE_URL,
-  changeOrigin: true,
-  pathRewrite: (path, req) => {
-    return `/genre/movie/list?language=en&api_key=${API_KEY}`;
-  },
-}));
+//
 
-// 
+app.use(
+  '/api/movies',
+  createProxyMiddleware({
+    target: BASE_URL,
+    changeOrigin: true,
+    pathRewrite: (path, req) => {
+      const voteLte = req.query.vote_average_lte;
+      const voteGte = req.query.vote_average_gte;
 
-app.use('/api/movies', createProxyMiddleware({
-  target: BASE_URL,
-  changeOrigin: true,
-  pathRewrite: (path, req) => {
-    // voteLte should be more than voteGte
-    // const voteLte = req.query.vote_average.lte
-    // const voteGte = req.query.vote_average.gte 
-    const voteLte =  req.query.vote_average_lte;
-    const voteGte =  req.query.vote_average_gte;
-    
-    console.log(voteLte)
-    console.log(voteGte)
-    const objQueryParams = {
-      include_adult: 'false',
-      include_video: 'false',
-      language: 'en-US',
-      page: req.query.page || '1',
-      sort_by: 'popularity.desc',
-      api_key: API_KEY,
-      primary_release_year : req.query.primary_release_year || '',
-      with_genres: req.query.with_genres || '',
-      "vote_average.lte":   voteLte || '',
-      "vote_average.gte":  voteGte || '',
-
-    }
-    const searchParams = new URLSearchParams(objQueryParams).toString()
-    // console.log(searchParams)
-    return (`/discover/movie?${searchParams}`)
-  },
-}));
+      const objQueryParams = {
+        include_adult: 'false',
+        include_video: 'false',
+        language: 'en-US',
+        page: req.query.page || '1',
+        sort_by: req.query.sort_by || '',
+        api_key: API_KEY,
+        primary_release_year: req.query.primary_release_year || '',
+        with_genres: req.query.with_genres || '',
+        'vote_average.lte': voteLte || '',
+        'vote_average.gte': voteGte || '',
+      };
+      const searchParams = new URLSearchParams(objQueryParams).toString();
+      // console.log(searchParams)
+      return `/discover/movie?${searchParams}`;
+    },
+  }),
+);
 
 app.use((err, _req, res, _next) => {
   console.error(err.stack);
   res.status(500).send('Server error');
 });
 
-app.listen(PORT)
+app.listen(PORT);
 
-export default app
-
+export default app;

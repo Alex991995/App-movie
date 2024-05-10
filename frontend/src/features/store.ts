@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import moviesSlice from './slices/moviesSlice';
+import  genreSlice  from './slices/genresSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    movies: moviesSlice,
+    genres: genreSlice,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
