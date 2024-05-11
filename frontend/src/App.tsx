@@ -1,16 +1,11 @@
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, Container } from '@mantine/core';
 import NavBar from './components/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import AllMovies from './pages/AllMovies';
 import Movie from './pages/Movie';
 import RatedMovies from './pages/RatedMovies';
 
-
-
 function App() {
-  
- 
- 
   // useEffect(() => {
   //   fetch('/api/movie/2')
   //     .then(data => data.json())
@@ -29,11 +24,15 @@ function App() {
     <MantineProvider>
       <main className="main">
         <NavBar />
-        <Routes>
-          <Route index element={<AllMovies/>}/>
-          <Route path='movies/:movie_id' element={<Movie/>}/>
-          <Route path='rated' element={<RatedMovies/>}/>
-      </Routes>
+        <Container>
+        {/* <div className="container"> */}
+          <Routes>
+            <Route index element={<AllMovies />} />
+            <Route path="movies/:movie_id" element={<Movie />} />
+            <Route path="rated" element={<RatedMovies />} />
+          </Routes>
+          </Container>
+        {/* </div> */}
       </main>
     </MantineProvider>
   );
