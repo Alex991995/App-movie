@@ -12,7 +12,7 @@ const fetchMovies = createAsyncThunk(
       page,
       with_genres,
     }: fetchMoviesProps,
-    { rejectWithValue, dispatch },
+    { rejectWithValue },
   ) {
     try {
       const objQueryParams = {
