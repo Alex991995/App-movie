@@ -60,7 +60,6 @@ app.use(
         'vote_average.gte': voteGte || '',
       };
       const searchParams = new URLSearchParams(objQueryParams).toString();
-      // console.log(searchParams)
       return `/discover/movie?${searchParams}`;
     },
   }),

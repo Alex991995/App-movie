@@ -5,17 +5,22 @@ import { fetchMovies } from '../features/slices/acyncThunck';
 import MultiSelector from '../components/MultiSelector';
 import styles from '../styles/allMovies.module.css';
 import SelectorSort from '../components/SelectorSort';
-
+import SelectorYear from '../components/SelectorYear';
+import SelectorsRating from '../components/SelectorsRating';
+import { Button } from '@mantine/core';
 
 function AllMovies() {
   const movies = useAppSelector(selectMovies);
   const dispatch = useAppDispatch();
 
   const [genresId, setGenresId] = useState<number[]>([]);
-  const [nameSortId, setNameSortId] = useState('')
+  const [nameSortId, setNameSortId] = useState('');
+  const [year, setValueYear] = useState('');
+  const [ratingFrom, setRatingFrom] = useState('');
+  const [ratingTo, setRatingTo] = useState('');
 
   const userData = {
-    release_year: '2010',
+    release_year: year,
     vote_average_gte: '1',
     vote_average_lte: '2',
     sort_by: nameSortId,
@@ -25,14 +30,22 @@ function AllMovies() {
 
   useEffect(() => {
     dispatch(fetchMovies(userData));
-  }, [genresId, nameSortId]);
+  }, [genresId, nameSortId, year]);
 
+  console.log(movies);
 
   return (
     <section>
-      <div className={styles.boxFileter}>
+      <h1 style={{fontSize:'32px'}}>Movies</h1>
+      <div className={styles.boxFilter}>
         <MultiSelector setGenresId={setGenresId} />
-        <SelectorSort setNameSortId={setNameSortId}  />
+        <SelectorYear setValueYear={setValueYear} />
+        <SelectorsRating
+          setRatingFrom={setRatingFrom}
+          setRatingTo={setRatingTo}
+        />
+        <Button  variant="subtle" color="gray">Reset filters</Button>
+        <SelectorSort setNameSortId={setNameSortId} />
       </div>
     </section>
   );

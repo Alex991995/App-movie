@@ -1,3 +1,32 @@
-.boxFileter {
-  display: flex;
+.boxFilter {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr; 
+  align-items: flex-end;
+  gap: 16px;
 }
+
+.boxRatingSelectors {
+  display: flex;
+  align-items: flex-end;
+  gap:8px;
+}
+.sortBy{
+  grid-column: 4/5;
+}
+
+@media (max-width: 950px) {
+  .boxFilter {
+    grid-template-columns: 1fr  1fr; 
+  }
+  .sortBy{
+    grid-column: 1/2;
+  }
+}
+
+@media (max-width: 660px) {
+  .boxFilter {
+    grid-template-columns:  1fr; 
+  }
+}
+
+

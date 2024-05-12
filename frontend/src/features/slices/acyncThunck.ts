@@ -24,7 +24,7 @@ const fetchMovies = createAsyncThunk(
         with_genres: with_genres 
       };
       const searchParams = new URLSearchParams(objQueryParams).toString();
-
+      console.log(searchParams)
       const response = await fetch(`/api/movies?${searchParams}`);
       if (!response.ok) {
         throw new Error('cannot set data of movies');
