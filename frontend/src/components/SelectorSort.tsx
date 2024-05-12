@@ -2,7 +2,7 @@ import { Select } from '@mantine/core';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { objSort } from '../features/constants';
-import styles from '../styles/allMovies.module.css';
+import styles from '../styles/HomePage.module.css';
 
 interface SelectorSortProps {
   setNameSortId: React.Dispatch<React.SetStateAction<string>>;

@@ -5,16 +5,19 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import styles from '../styles/allMovies.module.css';
 
 interface SelectorsRatingProps {
-  setRatingFrom: React.Dispatch<React.SetStateAction<string>>;
-  setRatingTo: React.Dispatch<React.SetStateAction<string>>;
+  setRatingFrom: React.Dispatch<React.SetStateAction<string | null>>;
+  setRatingTo: React.Dispatch<React.SetStateAction<string | null>>;
+  ratingFrom: string | null,
+  ratingTo: string | null
 }
 
-function SelectorsRating({ setRatingFrom, setRatingTo }: SelectorsRatingProps) {
+function SelectorsRating({ setRatingFrom, setRatingTo, ratingFrom, ratingTo }: SelectorsRatingProps) {
   const [focus, setFocus] = useState(false);
   return (
     <>
    
       <Select
+        value={ratingFrom}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}
         onBlur={() => setFocus(false)}
@@ -28,6 +31,7 @@ function SelectorsRating({ setRatingFrom, setRatingTo }: SelectorsRatingProps) {
       />
 
       <Select
+        value={ratingTo}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}
         onBlur={() => setFocus(false)}

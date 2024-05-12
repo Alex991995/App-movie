@@ -30,6 +30,10 @@
   max-width: 284px;
   grid-column: 4/6;
 }
+.boxPagination{
+  display: flex;
+  justify-content: flex-end;
+}
 
 @media (max-width: 990px) {
   .boxFilter {

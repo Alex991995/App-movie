@@ -1,0 +1,24 @@
+.listMovie {
+  display: grid;
+  grid-template-columns: minmax(auto, 502px) minmax(auto, 502px);
+  list-style: none;
+  gap: 16px;
+  padding-left: 0;
+}
+
+.oneMovie {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+}
+.boxInfoMovie{
+  
+}
+
+.textMovie{
+
+}
+
+.boxIcon{
+  
+}

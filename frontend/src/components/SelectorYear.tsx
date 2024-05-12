@@ -1,7 +1,6 @@
 import { Select } from '@mantine/core';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { years } from '../features/constants';
-
 
 interface SelectorYearProps {
   setValueYear: React.Dispatch<React.SetStateAction<string | null>>;

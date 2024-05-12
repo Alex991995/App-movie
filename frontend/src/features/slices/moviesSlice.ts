@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchMovies } from './acyncThunck';
+import { fetchMovies, fetchSingleMovie } from './acyncThunck';
 import type { Root, IMovies, IMoviesSlice } from '../types';
 
 const initialState: IMoviesSlice = {
   movies: undefined,
   loading: false,
   error: false,
-  queryParams: ''
+  singleMovie: undefined
 };
 
 export const moviesSlice = createSlice({
@@ -15,12 +15,10 @@ export const moviesSlice = createSlice({
 
   selectors: {
     selectMovies: state => state.movies,
-    selectQueryParams: state => state.queryParams,
+    selectOneMovie : state => state.singleMovie
   },
   reducers: {
-    getQueryParams:(state, action) => {
-      state.queryParams = action.payload
-    }
+    
   },
   extraReducers: builder => {
     builder
@@ -32,11 +30,21 @@ export const moviesSlice = createSlice({
       })
       .addCase(fetchMovies.rejected, state => {
         state.error = true;
+      })
+
+      .addCase(fetchSingleMovie.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchSingleMovie.fulfilled, (state, action) => {
+        (state.loading = false), (state.singleMovie = action.payload);
+      })
+      .addCase(fetchSingleMovie.rejected, state => {
+        state.error = true;
       });
   },
 });
 
-export const { getQueryParams } = moviesSlice.actions;
-export const { selectMovies, selectQueryParams } = moviesSlice.selectors;
+export const {  } = moviesSlice.actions;
+export const { selectMovies, selectOneMovie  } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;
