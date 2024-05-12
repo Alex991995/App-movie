@@ -6,6 +6,7 @@ const initialState: IMoviesSlice = {
   movies: undefined,
   loading: false,
   error: false,
+  queryParams: ''
 };
 
 export const moviesSlice = createSlice({
@@ -14,8 +15,13 @@ export const moviesSlice = createSlice({
 
   selectors: {
     selectMovies: state => state.movies,
+    selectQueryParams: state => state.queryParams,
   },
-  reducers: {},
+  reducers: {
+    getQueryParams:(state, action) => {
+      state.queryParams = action.payload
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchMovies.pending, state => {
@@ -30,7 +36,7 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const {} = moviesSlice.actions;
-export const { selectMovies } = moviesSlice.selectors;
+export const { getQueryParams } = moviesSlice.actions;
+export const { selectMovies, selectQueryParams } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;

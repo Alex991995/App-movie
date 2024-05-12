@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ArrayGenres, Root, fetchMoviesProps } from '../types';
+import { getQueryParams } from './moviesSlice';
+
 
 const fetchMovies = createAsyncThunk(
   'users/fetchByIdStatus',
@@ -12,7 +14,7 @@ const fetchMovies = createAsyncThunk(
       page,
       with_genres,
     }: fetchMoviesProps,
-    { rejectWithValue },
+    { rejectWithValue, dispatch },
   ) {
     try {
       const objQueryParams = {
@@ -24,7 +26,9 @@ const fetchMovies = createAsyncThunk(
         with_genres: with_genres 
       };
       const searchParams = new URLSearchParams(objQueryParams).toString();
-      console.log(searchParams)
+      // console.log(searchParams)
+      dispatch(getQueryParams(searchParams))
+      
       const response = await fetch(`/api/movies?${searchParams}`);
       if (!response.ok) {
         throw new Error('cannot set data of movies');

@@ -34,7 +34,8 @@ export interface fetchMoviesProps {
 export interface IMoviesSlice {
   movies: Root | undefined
   loading: boolean,
-  error: boolean
+  error: boolean,
+  queryParams: string
 }
 
 export interface IGenresSlice {

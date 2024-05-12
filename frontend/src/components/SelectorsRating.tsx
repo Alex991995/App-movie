@@ -12,7 +12,8 @@ interface SelectorsRatingProps {
 function SelectorsRating({ setRatingFrom, setRatingTo }: SelectorsRatingProps) {
   const [focus, setFocus] = useState(false);
   return (
-    <div className={styles.boxRatingSelectors}>
+    <>
+   
       <Select
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}
@@ -37,7 +38,8 @@ function SelectorsRating({ setRatingFrom, setRatingTo }: SelectorsRatingProps) {
           transitionProps: { transition: 'pop', duration: 200 },
         }}
       />
-    </div>
+
+    </>
   );
 }
 
