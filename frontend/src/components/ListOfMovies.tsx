@@ -1,6 +1,6 @@
 import { IforListOfMovies } from '../features/types';
 import { Link } from 'react-router-dom';
-import styles from '../styles/listOfMovies.module.css';
+import styles from '../styles/ListOfMovies.module.css';
 import { AspectRatio, Image, Loader } from '@mantine/core';
 import { useAppSelector } from '../features/hooks/reduxHooks';
 import { selectLoading } from '../features/slices/moviesSlice';
@@ -11,10 +11,7 @@ interface ListOfMoviesProps {
 
 function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const loading = useAppSelector(selectLoading);
-  // dataForListOfMovies?.map(item => {
-  //   // console.log(typeof item.poster_path)
-  //   // console.log(null === undefined)
-  // })
+
   return (
     <>
       {loading ? (
