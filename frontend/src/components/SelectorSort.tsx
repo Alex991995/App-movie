@@ -2,7 +2,7 @@ import { Select } from '@mantine/core';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { objSort } from '../features/constants';
-import styles from '../styles/HomePage.module.css';
+import styles from '../styles/homePage.module.css';
 
 interface SelectorSortProps {
   setNameSortId: React.Dispatch<React.SetStateAction<string>>;
@@ -10,7 +10,7 @@ interface SelectorSortProps {
 
 function SelectorSort({ setNameSortId }: SelectorSortProps) {
   const [focus, setFocus] = useState(false);
-  const [valueSort, setValueSort] = useState<string | null>('');
+  const [valueSort, setValueSort] = useState<string | null>(null);
 
   useEffect(() => {
     objSort.forEach(item => {
@@ -21,7 +21,7 @@ function SelectorSort({ setNameSortId }: SelectorSortProps) {
   return (
     <Select
       className={styles.sortBy}
-    
+      radius="md"
       rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
       onChange={setValueSort}
       onClick={() => setFocus(!focus)}

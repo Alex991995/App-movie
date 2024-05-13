@@ -35,6 +35,11 @@
   justify-content: flex-end;
 }
 
+.wrapperMovieAndPagination{
+  display: grid;
+  grid-template-rows: minmax(auto, 100%) 200px;
+}
+
 @media (max-width: 990px) {
   .boxFilter {
     grid-template-columns: 1fr 1fr;

@@ -4,17 +4,21 @@ import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { fetchMovies } from '../features/slices/acyncThunck';
 import { Pagination } from '@mantine/core';
 
-import styles from '../styles/HomePage.module.css';
+import styles from '../styles/homePage.module.css';
 
 import MultiSelector from '../components/MultiSelector';
 import SelectorSort from '../components/SelectorSort';
 import SelectorYear from '../components/SelectorYear';
 import SelectorsRating from '../components/SelectorsRating';
 import ListOfMovies from '../components/ListOfMovies';
+import { IforListOfMovies } from '../features/types';
+import MovieNotFound from '../components/MovieNotFound';
 
 function AllMovies() {
   const movies = useAppSelector(selectMovies);
   const dispatch = useAppDispatch();
+
+  console.log(movies);
 
   const [genresId, setGenresId] = useState<number[]>([]);
   const [nameSortId, setNameSortId] = useState('');
@@ -23,6 +27,25 @@ function AllMovies() {
   const [ratingTo, setRatingTo] = useState<string | null>('');
   const [genres, setGenres] = useState<string[] | undefined>([]);
   const [page, setPage] = useState(1);
+
+  const [dataForListOfMovies, setDataForListOfMovies] = useState<
+    IforListOfMovies[] | undefined
+  >();
+
+  // extract specific data for display bunch of movies
+  useEffect(() => {
+    setDataForListOfMovies(
+      movies?.results.map(movie => ({
+        id: movie.id,
+        original_title: movie.original_title,
+        poster_path: movie.poster_path || '',
+        release_date: movie.release_date,
+        vote_average: movie.vote_average,
+        vote_count: movie.vote_count,
+        genre_ids: movie.genre_ids,
+      })),
+    );
+  }, [movies]);
 
   function reset() {
     setValueYear(null);
@@ -66,17 +89,28 @@ function AllMovies() {
         <SelectorSort setNameSortId={setNameSortId} />
       </div>
 
-      <ListOfMovies movies={movies?.results} />
+      {movies?.results.length === 0 ? (
+        <MovieNotFound />
+      ) : (
+      
+        <div className={styles.wrapperMovieAndPagination}>
 
-      <div className={styles.boxPagination}>
-        <Pagination
-          dotsIcon={undefined}
-          color="#9854F6"
-          value={page}
-          onChange={setPage}
-          total={movies?.total_pages!}
-        />
-      </div>
+       
+          <ListOfMovies dataForListOfMovies={dataForListOfMovies} />
+
+          <div className={styles.boxPagination}>
+            <Pagination
+              mt="24px"
+              mb="82px"
+              color="#9854F6"
+              value={page}
+              onChange={setPage}
+              total={movies?.total_pages!}
+            />
+          </div>
+          </div>
+        
+      )}
     </section>
   );
 }

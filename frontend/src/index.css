@@ -3,20 +3,18 @@
 body {
   margin: 0;
   padding: 0;
-  
 }
-
 
 .main {
   display: grid;
   grid-template-columns: minmax(auto, 300px) 1fr;
-  background-color: #EAEBED;
+  background-color: #eaebed;
+  grid-template-rows: minmax(100vh, 100%);
 }
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 10px 0 10px;
-
 }
 .linkButton {
   color: black;
@@ -54,9 +52,18 @@ body {
 a {
   text-decoration: none;
 }
+.movieNotFound{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 24px;
+  text-align: center;
+}
 
 @media (max-width: 520px) {
   .main {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
+ 
 }

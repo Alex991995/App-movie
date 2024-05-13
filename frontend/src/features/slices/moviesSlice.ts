@@ -15,7 +15,8 @@ export const moviesSlice = createSlice({
 
   selectors: {
     selectMovies: state => state.movies,
-    selectOneMovie : state => state.singleMovie
+    selectOneMovie : state => state.singleMovie,
+    selectLoading : state => state.loading
   },
   reducers: {
     
@@ -24,12 +25,17 @@ export const moviesSlice = createSlice({
     builder
       .addCase(fetchMovies.pending, state => {
         state.loading = true;
+        state.error = false;
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
-        (state.loading = false), (state.movies = action.payload);
+        state.loading = false;
+        state.error = false;
+        state.movies = action.payload;
+        
       })
       .addCase(fetchMovies.rejected, state => {
         state.error = true;
+        state.loading = false;
       })
 
       .addCase(fetchSingleMovie.pending, state => {
@@ -44,7 +50,7 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const {  } = moviesSlice.actions;
-export const { selectMovies, selectOneMovie  } = moviesSlice.selectors;
+export const {   } = moviesSlice.actions;
+export const { selectMovies, selectOneMovie, selectLoading  } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;

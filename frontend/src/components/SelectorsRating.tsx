@@ -17,6 +17,7 @@ function SelectorsRating({ setRatingFrom, setRatingTo, ratingFrom, ratingTo }: S
     <>
    
       <Select
+        radius="md"
         value={ratingFrom}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}
@@ -31,6 +32,7 @@ function SelectorsRating({ setRatingFrom, setRatingTo, ratingFrom, ratingTo }: S
       />
 
       <Select
+        radius="md"
         value={ratingTo}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}

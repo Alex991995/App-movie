@@ -12,6 +12,7 @@ function SelectorYear({ setValueYear, year }: SelectorYearProps) {
 
   return (
     <Select
+      radius="md"
       value={year}
       onChange={value => setValueYear(value!)}
       onClick={() => setFocus(!focus)}

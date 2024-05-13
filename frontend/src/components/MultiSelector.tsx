@@ -30,6 +30,7 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
   return (
     <>
       <MultiSelect
+        radius="md"
         value={genres}
         onChange={setGenres}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
@@ -37,7 +38,6 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
         onBlur={() => setFocus(false)}
         label="Genre"
         hidePickedOptions
-        maxValues={4}
         placeholder={genres?.length ? '' : 'Select genre'}
         data={storeGenres?.genres.map(item => item.name)}
         comboboxProps={{
