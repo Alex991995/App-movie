@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { fetchMovies } from '../features/slices/acyncThunck';
 import { Pagination } from '@mantine/core';
 
-import styles from '../styles/homePage.module.css';
+import styles from '../styles/HomePage.module.css';
 
 import MultiSelector from '../components/MultiSelector';
 import SelectorSort from '../components/SelectorSort';
