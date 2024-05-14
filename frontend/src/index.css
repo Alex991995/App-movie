@@ -49,6 +49,26 @@ body {
   color: #fff;
 }
 
+
+.mantine-MultiSelect-pill{
+  border-radius: 0;
+  background-color: transparent;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+}
+.mantine-MultiSelect-pill::after{
+  content: ',';
+}
+.mantine-MultiSelect-pill:last-child{
+ background-color: #bd93f7;
+ font-size: 34px;
+}
+
+.mantine-Pill-remove{
+  display: none;
+}
+
 a {
   text-decoration: none;
 }

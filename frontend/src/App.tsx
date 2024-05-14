@@ -1,8 +1,8 @@
 import { MantineProvider, Container } from '@mantine/core';
 import NavBar from './components/NavBar';
-import { Route, Routes } from 'react-router-dom';
-import AllMovies from './pages/HomePage';
-import Movie from './pages/MoviePage';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import HomePag from './pages/HomePage';
+import MoviePage from './pages/MoviePage';
 import RatedMovies from './pages/RatedMovies';
 
 function App() {
@@ -13,12 +13,12 @@ function App() {
 
         <div className="container">
           <Routes>
-            <Route index element={<AllMovies />} />
-            <Route path="movie/:movie_id" element={<Movie />} />
-            <Route path="rated" element={<RatedMovies />} />
+            <Route path="/" element={<Navigate to="/movies" />} />
+            <Route path="/movies" element={<HomePag />} />
+            <Route path="/movies/:movie_id" element={<MoviePage />} />
+            <Route path="/rated" element={<RatedMovies />} />
           </Routes>
         </div>
-        
       </main>
     </MantineProvider>
   );

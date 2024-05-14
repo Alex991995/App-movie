@@ -36,6 +36,7 @@ export interface IMoviesSlice {
   loading: boolean;
   error: boolean;
   singleMovie: INformationAbMovie | undefined;
+  ratedMovies: undefined;
 }
 
 export interface IGenresSlice {

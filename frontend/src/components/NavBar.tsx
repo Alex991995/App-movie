@@ -5,8 +5,10 @@ import Icon from '../assets/Arrow-icon.svg';
 import { useDisclosure } from '@mantine/hooks';
 
 function NavBar() {
-  const [opened, { toggle }] = useDisclosure();
-  console.log(opened);
+  // const [opened, { toggle }] = useDisclosure();
+
+  
+ 
   return (
     <div className={styles.navbar}>
       <div className={styles.boxLogo}>
@@ -21,7 +23,7 @@ function NavBar() {
           color="#E5D5FA"
           radius="md"
           component={NavLink}
-          to="/"
+          to="/movies"
         >
           <span> Movies</span>
         </Button>

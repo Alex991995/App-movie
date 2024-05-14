@@ -4,6 +4,10 @@ import styles from '../styles/ListOfMovies.module.css';
 import { AspectRatio, Image, Loader } from '@mantine/core';
 import { useAppSelector } from '../features/hooks/reduxHooks';
 import { selectLoading } from '../features/slices/moviesSlice';
+import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
+import ModalComponent from './ModalComponent';
+import { useState } from 'react';
 
 interface ListOfMoviesProps {
   dataForListOfMovies: IforListOfMovies[] | undefined;
@@ -11,6 +15,16 @@ interface ListOfMoviesProps {
 
 function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const loading = useAppSelector(selectLoading);
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const [ chosenMovie, setChosenMovie ] = useState<IforListOfMovies | undefined>(undefined)
+
+  function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item:IforListOfMovies) {
+    e.preventDefault()
+    open()
+    setChosenMovie(item)
+  }
+  
 
   return (
     <>
@@ -23,12 +37,20 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
         <ul className={styles.listMovie}>
           {dataForListOfMovies?.map(item => (
             <li className={styles.oneMovie} key={item.id}>
-              <Link to={`movie/${item.id}`}>
+              <Link to={`${item.id}`}>
                 <div className={styles.boxInfoMovie}>
                   <AspectRatio>
-                    
                     {item.poster_path === '' ? (
-                      <div style={{maxWidth: '120px', minHeight: '170px'}}>No Poster</div>
+                      <div className={styles.noPoster}>
+                        <div>
+                          <IconPhotoOff
+                            size={48}
+                            strokeWidth={2}
+                            color={'black'}
+                          />
+                        </div>
+                        <p> No Poster</p>
+                      </div>
                     ) : (
                       <Image
                         w="120px"
@@ -40,15 +62,22 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                     )}
                   </AspectRatio>
 
-                  <div className={styles.textMovie}></div>
+                  <div className={styles.textMovie}>
+                    <h4>{item.original_title}</h4>
+                    <p></p>
+                  </div>
 
-                  <div className={styles.boxIcon}></div>
+                  <div className={styles.boxIcon}>
+                    <IconStarFilled color='#D5D6DC' onClick={e => callModal(e, item)}/>
+                  </div>
                 </div>
               </Link>
             </li>
           ))}
         </ul>
       )}
+
+      <ModalComponent chosenMovie={chosenMovie}  opened={opened} close={close} />
     </>
   );
 }

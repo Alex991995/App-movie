@@ -18,7 +18,7 @@ function AllMovies() {
   const movies = useAppSelector(selectMovies);
   const dispatch = useAppDispatch();
 
-  console.log(movies);
+
 
   const [genresId, setGenresId] = useState<number[]>([]);
   const [nameSortId, setNameSortId] = useState('');

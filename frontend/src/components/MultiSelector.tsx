@@ -31,13 +31,14 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
     <>
       <MultiSelect
         radius="md"
+     
         value={genres}
         onChange={setGenres}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}
         onBlur={() => setFocus(false)}
         label="Genre"
-        hidePickedOptions
+        withCheckIcon={false}
         placeholder={genres?.length ? '' : 'Select genre'}
         data={storeGenres?.genres.map(item => item.name)}
         comboboxProps={{

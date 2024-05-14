@@ -6,7 +6,8 @@ const initialState: IMoviesSlice = {
   movies: undefined,
   loading: false,
   error: false,
-  singleMovie: undefined
+  singleMovie: undefined,
+  ratedMovies: undefined,
 };
 
 export const moviesSlice = createSlice({
@@ -19,6 +20,14 @@ export const moviesSlice = createSlice({
     selectLoading : state => state.loading
   },
   reducers: {
+    // addRatedMovies( (state, action) =>{
+
+    // })
+
+    addRatedMovies: (state, action ) => {
+      state.ratedMovies = action.payload
+    }
+
     
   },
   extraReducers: builder => {
@@ -50,7 +59,7 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const {   } = moviesSlice.actions;
+export const {  addRatedMovies } = moviesSlice.actions;
 export const { selectMovies, selectOneMovie, selectLoading  } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;
