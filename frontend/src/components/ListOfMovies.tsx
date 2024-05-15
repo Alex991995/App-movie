@@ -18,15 +18,12 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const ratedMovies = useAppSelector(selectRating);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
-  const [colorStar, setColorStar] = useState('');
 
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
     e.preventDefault();
-    setColorStar('dd');
     setChosenMovie(item);
     open();
   }
-
 
   function color(id: number) {
     return ratedMovies.some(item => item.id === id);
@@ -90,12 +87,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
         </ul>
       )}
 
-      <ModalComponent
-        colorStar={colorStar}
-        chosenMovie={chosenMovie}
-        opened={opened}
-        close={close}
-      />
+      <ModalComponent chosenMovie={chosenMovie} opened={opened} close={close} />
     </>
   );
 }

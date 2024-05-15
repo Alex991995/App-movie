@@ -8,10 +8,9 @@ interface IModalComponent {
   opened: boolean;
   close: () => void;
   chosenMovie: IforListOfMovies | undefined;
-  colorStar: string;
 }
 
-function ModalComponent({ opened, close, chosenMovie, colorStar }: IModalComponent) {
+function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState(0);
 
