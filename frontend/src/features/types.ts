@@ -36,7 +36,7 @@ export interface IMoviesSlice {
   loading: boolean;
   error: boolean;
   singleMovie: INformationAbMovie | undefined;
-  ratedMovies: undefined;
+  ratedMovies: IforListOfMovies[];
 }
 
 export interface IGenresSlice {
@@ -114,4 +114,5 @@ export interface IforListOfMovies {
   vote_average: number;
   vote_count: number;
   genre_ids: number[];
+  rating: number
 }

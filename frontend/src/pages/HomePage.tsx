@@ -18,7 +18,7 @@ function AllMovies() {
   const movies = useAppSelector(selectMovies);
   const dispatch = useAppDispatch();
 
-
+console.log(movies)
 
   const [genresId, setGenresId] = useState<number[]>([]);
   const [nameSortId, setNameSortId] = useState('');
@@ -43,6 +43,7 @@ function AllMovies() {
         vote_average: movie.vote_average,
         vote_count: movie.vote_count,
         genre_ids: movie.genre_ids,
+        rating: 0
       })),
     );
   }, [movies]);

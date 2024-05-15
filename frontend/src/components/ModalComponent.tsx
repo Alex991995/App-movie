@@ -1,5 +1,5 @@
 import { Button, Modal, Rating } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IforListOfMovies } from '../features/types';
 import { addRatedMovies } from '../features/slices/moviesSlice';
 import { useAppDispatch } from '../features/hooks/reduxHooks';
@@ -8,21 +8,20 @@ interface IModalComponent {
   opened: boolean;
   close: () => void;
   chosenMovie: IforListOfMovies | undefined;
+  colorStar: string;
 }
 
-function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
-  // const [ratedMovie, setRatedMovie ] = useState()
-
+function ModalComponent({ opened, close, chosenMovie, colorStar }: IModalComponent) {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState(0);
 
-
-
   function storeRatedMovie() {
     if (chosenMovie) {
-      const ratedMovie = { ...chosenMovie, rating: value };
-     
+      const changedChosenMovie: IforListOfMovies = Object.assign({ ...chosenMovie, rating: value });
+      console.log(changedChosenMovie);
+      dispatch(addRatedMovies(changedChosenMovie));
     }
+
     setValue(0);
     close();
   }

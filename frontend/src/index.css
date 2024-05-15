@@ -23,11 +23,17 @@ body {
     &:hover {
       color: #bd93f7;
     }
+    /* &:active {
+      color: black;
+    } */
   }
 }
 .active {
   color: #9854f6;
   background-color: #e5d5fa;
+  &:hover{
+    background-color: #E5D5FA;
+  }
 }
 .mantine-MultiSelect-label {
   font-size: 16px;
@@ -57,13 +63,13 @@ body {
   font-weight: 400;
   font-size: 14px;
 }
-.mantine-MultiSelect-pill::after{
+/* .mantine-MultiSelect-pill::after{
   content: ',';
 }
 .mantine-MultiSelect-pill:last-child{
- background-color: #bd93f7;
- font-size: 34px;
-}
+  content: ' ';
+} */
+
 
 .mantine-Pill-remove{
   display: none;

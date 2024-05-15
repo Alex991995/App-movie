@@ -15,7 +15,23 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
   const storeGenres = useAppSelector(selectGenres);
   const dispatch = useAppDispatch();
 
+  const [chosenGenres, setChosenGenres] = useState<string[] | undefined>(undefined);
+  // console.log( ss)
+
   useEffect(() => {
+    setChosenGenres(
+      genres?.map((item, index) => {
+        index++;
+        if (genres?.length === index) {
+          return item;
+        } else if (item.endsWith(',')) {
+          return item;
+        } else {
+          return item + ',';
+        }
+      }),
+    );
+
     const arrId: number[] = [];
     storeGenres?.genres.forEach(item => {
       if (genres?.includes(item.name)) arrId.push(item.id);
@@ -31,8 +47,7 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
     <>
       <MultiSelect
         radius="md"
-     
-        value={genres}
+        value={chosenGenres}
         onChange={setGenres}
         rightSection={focus ? <IconChevronDown /> : <IconChevronUp />}
         onClick={() => setFocus(!focus)}

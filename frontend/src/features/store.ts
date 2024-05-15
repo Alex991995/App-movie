@@ -7,6 +7,7 @@ export const store = configureStore({
     movies: moviesSlice,
     genres: genreSlice,
   },
+  devTools: true
 });
 
 export type RootState = ReturnType<typeof store.getState>;
