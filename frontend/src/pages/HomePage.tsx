@@ -18,8 +18,6 @@ function AllMovies() {
   const movies = useAppSelector(selectMovies);
   const dispatch = useAppDispatch();
 
-console.log(movies)
-
   const [genresId, setGenresId] = useState<number[]>([]);
   const [nameSortId, setNameSortId] = useState('');
   const [year, setValueYear] = useState<string | null>('');
@@ -28,10 +26,8 @@ console.log(movies)
   const [genres, setGenres] = useState<string[] | undefined>([]);
   const [page, setPage] = useState(1);
 
-  const [dataForListOfMovies, setDataForListOfMovies] = useState<
-    IforListOfMovies[] | undefined
-  >();
-
+  const [dataForListOfMovies, setDataForListOfMovies] = useState<IforListOfMovies[] | undefined>();
+console.log(movies)
   // extract specific data for display bunch of movies
   useEffect(() => {
     setDataForListOfMovies(
@@ -43,7 +39,7 @@ console.log(movies)
         vote_average: movie.vote_average,
         vote_count: movie.vote_count,
         genre_ids: movie.genre_ids,
-        rating: 0
+        rating: 0,
       })),
     );
   }, [movies]);
@@ -69,13 +65,9 @@ console.log(movies)
 
   return (
     <section>
-      <h1 style={{ fontSize: '32px' }}>Movies</h1>
+      <h1 className={styles.titleHome} >Movies</h1>
       <div className={styles.boxFilter}>
-        <MultiSelector
-          setGenresId={setGenresId}
-          genres={genres}
-          setGenres={setGenres}
-        />
+        <MultiSelector setGenresId={setGenresId} genres={genres} setGenres={setGenres} />
         <SelectorYear year={year} setValueYear={setValueYear} />
         <SelectorsRating
           setRatingFrom={setRatingFrom}
@@ -93,10 +85,7 @@ console.log(movies)
       {movies?.results.length === 0 ? (
         <MovieNotFound />
       ) : (
-      
         <div className={styles.wrapperMovieAndPagination}>
-
-       
           <ListOfMovies dataForListOfMovies={dataForListOfMovies} />
 
           <div className={styles.boxPagination}>
@@ -109,8 +98,7 @@ console.log(movies)
               total={movies?.total_pages!}
             />
           </div>
-          </div>
-        
+        </div>
       )}
     </section>
   );

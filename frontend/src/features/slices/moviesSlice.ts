@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchMovies, fetchSingleMovie } from './acyncThunck';
-import type { Root, IMovies, IMoviesSlice, IforListOfMovies } from '../types';
+import type { IMoviesSlice, IforListOfMovies } from '../types';
 
 const initialState: IMoviesSlice = {
   movies: undefined,
@@ -29,6 +29,10 @@ export const moviesSlice = createSlice({
 
       localStorage.setItem('rating', JSON.stringify(state.ratedMovies));
     },
+    removeRatedMovie:(state, action:PayloadAction<number> ) => {
+      state.ratedMovies = state.ratedMovies.filter(movie => movie.id !== action.payload)
+      localStorage.setItem('rating', JSON.stringify(state.ratedMovies));
+    }
   },
   extraReducers: builder => {
     builder
@@ -58,7 +62,7 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const { addRatedMovies } = moviesSlice.actions;
+export const { addRatedMovies, removeRatedMovie } = moviesSlice.actions;
 export const { selectMovies, selectOneMovie, selectLoading, selectRating } = moviesSlice.selectors;
 
 export default moviesSlice.reducer;

@@ -6,7 +6,11 @@
   align-items: flex-end;
   gap: 16px;
 }
-.boxButtonReset{
+.titleHome{
+  font-size: 32px;
+
+}
+.boxButtonReset {
   display: flex;
 }
 
@@ -30,12 +34,12 @@
   max-width: 284px;
   grid-column: 4/6;
 }
-.boxPagination{
+.boxPagination {
   display: flex;
   justify-content: flex-end;
 }
 
-.wrapperMovieAndPagination{
+.wrapperMovieAndPagination {
   display: grid;
   grid-template-rows: minmax(auto, 100%) 200px;
 }
@@ -51,9 +55,13 @@
 
 @media (max-width: 660px) {
   .boxFilter {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(auto, 200px);
+    justify-content: center;
   }
-  .boxButtonReset{
-    justify-content: center
+  .boxButtonReset {
+    justify-content: center;
+  }
+  .titleHome{
+    text-align: center;
   }
 }

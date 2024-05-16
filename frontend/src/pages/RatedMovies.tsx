@@ -9,6 +9,8 @@ function RatedMovies() {
 
 
   return (
+
+
     <ListOfMovies dataForListOfMovies={ratedMovies} />
   )
 }
