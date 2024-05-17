@@ -21,7 +21,6 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const ratedMovies = useAppSelector(selectRating);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
-  const navigate = useNavigate();
    
 
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
@@ -57,6 +56,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   }
 
   function isZeroAtEnd(num:number ) {
+    if(num === 10) return num
     const fixedOne = num.toFixed(1)
    
     if(fixedOne.slice(-1) === "0"){
@@ -81,8 +81,8 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
       ) : (
         <ul className={styles.listMovie}>
           {dataForListOfMovies?.map(item => (
-            <li className={styles.oneMovie} key={item.id} onClick={()=> navigate(`${item.id}`)}>
-              {/* <Link className={styles.boxInfoMovie}  to={`${item.id}`}> */}
+            <li className={styles.oneMovie} key={item.id} >
+              <Link className={styles.boxInfoMovie}  to={`${item.id}`}>
                 {/* <div className={styles.boxInfoMovie}> */}
                   <AspectRatio>
                     {item.poster_path === '' ? (
@@ -129,7 +129,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                     <span>{findRating(item.id)}</span>
                   </div>
                 {/* </div> */}
-              {/* </Link> */}
+              </Link>
             </li>
           ))}
         </ul>

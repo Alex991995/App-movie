@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { selectMovies } from '../features/slices/moviesSlice';
 import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { fetchMovies } from '../features/slices/acyncThunck';
-import { Pagination } from '@mantine/core';
 
 import styles from '../styles/HomePage.module.css';
 
@@ -13,6 +12,7 @@ import SelectorsRating from '../components/SelectorsRating';
 import ListOfMovies from '../components/ListOfMovies';
 import { IforListOfMovies } from '../features/types';
 import MovieNotFound from '../components/MovieNotFound';
+import PaginationComponent from '../components/PaginationComponent';
 
 function AllMovies() {
   const movies = useAppSelector(selectMovies);
@@ -25,9 +25,10 @@ function AllMovies() {
   const [ratingTo, setRatingTo] = useState<string | null>('');
   const [genres, setGenres] = useState<string[] | undefined>([]);
   const [page, setPage] = useState(1);
+  const allPages = 500;
 
+  // console.log(movies)
   const [dataForListOfMovies, setDataForListOfMovies] = useState<IforListOfMovies[] | undefined>();
-console.log(movies)
   // extract specific data for display bunch of movies
   useEffect(() => {
     setDataForListOfMovies(
@@ -89,14 +90,9 @@ console.log(movies)
           <ListOfMovies dataForListOfMovies={dataForListOfMovies} />
 
           <div className={styles.boxPagination}>
-            <Pagination
-              mt="24px"
-              mb="82px"
-              color="#9854F6"
-              value={page}
-              onChange={setPage}
-              total={movies?.total_pages!}
-            />
+          <PaginationComponent allPages={allPages} page={page} setPage={setPage}/>
+         
+
           </div>
         </div>
       )}

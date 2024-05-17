@@ -13,6 +13,7 @@ body {
 }
 .container {
   max-width: 1000px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 10px 0 10px;
 }
@@ -55,7 +56,6 @@ body {
   color: #fff;
 }
 
-
 .mantine-MultiSelect-pill{
   border-radius: 0;
   background-color: transparent;
@@ -70,8 +70,20 @@ body {
   content: ' ';
 } */
 
+/* .mantine-Pagination-control:nth-last-child(2){
+  display: none;
+} */
+/* .mantine-Pagination-control:nth-child(1){
+  display: none;
+} */
+
+
 
 .mantine-Pill-remove{
+  display: none;
+}
+
+.mantine-Pagination-dots {
   display: none;
 }
 

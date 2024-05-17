@@ -1,59 +1,59 @@
 export const objSort = [
   {
     name: 'Most Popular',
-    nameSort: 'popularity.asc',
-  },
-  {
-    name: 'Least Popular',
     nameSort: 'popularity.desc',
   },
   {
-    name: 'Most Rated',
-    nameSort: 'vote_average.asc',
+    name: 'Least Popular',
+    nameSort: 'popularity.asc',
   },
   {
-    name: 'Least Rated',
+    name: 'Most Rated' ,
     nameSort: 'vote_average.desc',
   },
   {
-    name: 'Most Voted',
-    nameSort: 'vote_count.asc',
+    name: 'Least Rated',
+    nameSort: 'vote_average.asc',
   },
   {
-    name: 'Least Voted',
+    name: 'Most Voted',
     nameSort: 'vote_count.desc',
   },
   {
-    name: 'Most Release Date',
-    nameSort: 'release_date.asc',
+    name: 'Least Voted',
+    nameSort: 'vote_count.asc',
   },
   {
-    name: 'Least Release Date',
+    name: 'Most Release Date',
     nameSort: 'release_date.desc',
   },
   {
-    name: 'Most Profitable',
-    nameSort: 'revenue.asc',
+    name: 'Least Release Date',
+    nameSort: 'release_date.acs',
   },
   {
-    name: 'Least Profitable',
+    name: 'Most Profitable',
     nameSort: 'revenue.desc',
   },
   {
-    name: 'Most Primary Release Date',
-    nameSort: 'primary_release_date.asc',
+    name: 'Least Profitable',
+    nameSort: 'revenue.asc',
   },
   {
-    name: 'Least Primary Release Date',
+    name: 'Most Primary Release Date',
     nameSort: 'primary_release_date.desc',
   },
   {
+    name: 'Least Primary Release Date',
+    nameSort: 'primary_release_date.asc',
+  },
+  {
     name: 'Sort alphabetically (Most)',
-    nameSort: 'original_title.asc',
+    nameSort: 'original_title.desc',
   },
   {
     name: 'Sort alphabetically (Least) ',
-    nameSort: 'original_title.desc',
+    nameSort: 'original_title.asc',
   },
 ];
 

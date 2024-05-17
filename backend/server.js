@@ -52,7 +52,7 @@ app.use(
         include_video: 'false',
         language: 'en-US',
         page: req.query.page || '1',
-        sort_by: req.query.sort_by || '',
+        sort_by: req.query.sort_by || 'popularity.desc',
         api_key: API_KEY,
         primary_release_year: req.query.primary_release_year || '',
         with_genres: req.query.with_genres || '',

@@ -28,6 +28,7 @@ function SelectorSort({ setNameSortId }: SelectorSortProps) {
       onBlur={() => setFocus(false)}
       label="Sort by"
       placeholder="Pick value"
+      defaultValue={objSort[0].name}
       data={objSort.map(item => item.name)}
       comboboxProps={{ transitionProps: { transition: 'pop', duration: 200 } }}
     />
