@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { pagesCutting, range } from '../helpers/functionHelpers';
 import styles from '../styles/Pagination.module.css';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { useSetState } from '@mantine/hooks';
 
 interface PaginationComponentProps {
   allPages: number;
@@ -10,7 +9,7 @@ interface PaginationComponentProps {
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function PaginationComponent({allPages, page, setPage }: PaginationComponentProps) {
+function PaginationComponent({ allPages, page, setPage }: PaginationComponentProps) {
   const getPagesCut = pagesCutting(allPages, page);
   const numberPages = range(getPagesCut.start, getPagesCut.end);
   function previousPage() {
@@ -29,14 +28,13 @@ function PaginationComponent({allPages, page, setPage }: PaginationComponentProp
       <button disabled={page === 1 && true} className={styles.button} onClick={previousPage}>
         <IconChevronLeft color={page === 1 ? '#D5D6DC ' : '#7B7C88'} size={16} />
       </button>
-      {numberPages.map((p, index) => (
+      {numberPages.map(p => (
         <button
           key={p}
           className={p === page ? styles.activePage : styles.button}
           onClick={() => fetchSpecificPage(p)}
         >
           {p}
-          {/* <span>{index}</span> */}
         </button>
       ))}
       <button disabled={page === allPages && true} className={styles.button} onClick={nextPage}>
