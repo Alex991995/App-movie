@@ -1,0 +1,6 @@
+.wrapperMovie {
+  display: grid;
+  grid-template-columns: minmax(auto, 800px);
+  grid-template-rows: minmax(auto, 400px);
+
+}

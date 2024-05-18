@@ -24,16 +24,13 @@ body {
     &:hover {
       color: #bd93f7;
     }
-    /* &:active {
-      color: black;
-    } */
   }
 }
 .active {
   color: #9854f6;
   background-color: #e5d5fa;
-  &:hover{
-    background-color: #E5D5FA;
+  &:hover {
+    background-color: #e5d5fa;
   }
 }
 .mantine-MultiSelect-label {
@@ -56,7 +53,7 @@ body {
   color: #fff;
 }
 
-.mantine-MultiSelect-pill{
+.mantine-MultiSelect-pill {
   border-radius: 0;
   background-color: transparent;
   padding: 0;
@@ -67,14 +64,14 @@ body {
 .mantine-Input-wrapper {
   height: 100%;
 }
-._wrap_1o6ls_1 ._listMovie_ccujp_1{
+._wrap_1o6ls_1 ._listMovie_ccujp_1 {
   align-self: start;
 }
-.mantine-Input-input{
+.mantine-Input-input {
   height: 100%;
 }
 
-.mantine-Pill-remove{
+.mantine-Pill-remove {
   display: none;
 }
 
@@ -85,7 +82,7 @@ body {
 a {
   text-decoration: none;
 }
-.movieNotFound{
+.movieNotFound {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -98,5 +95,4 @@ a {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
- 
 }

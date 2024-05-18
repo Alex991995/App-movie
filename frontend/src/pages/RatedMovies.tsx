@@ -6,6 +6,7 @@ import PaginationComponent from '../components/PaginationComponent';
 import styles from '../styles/RatedMovies.module.css';
 import { Button, TextInput, camelToKebabCase } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
+import EmptyState from '../components/EmptyState';
 
 function RatedMovies() {
   const ratedMovies = useAppSelector(selectRating);
@@ -15,14 +16,14 @@ function RatedMovies() {
 
   function find() {
     setMovies(prev => prev.filter(movie => movie.original_title.includes(value)));
-    setPage(1)
+    setPage(1);
   }
 
-  useEffect(()=> {
-    if(value.trim().length === 0){
-      setMovies(ratedMovies)
+  useEffect(() => {
+    if (value.trim().length === 0) {
+      setMovies(ratedMovies);
     }
-  },[value])
+  }, [value]);
 
   const moviesPerPage = 4;
   const allPages = Math.ceil(movies.length / 4);
@@ -41,23 +42,30 @@ function RatedMovies() {
 
   return (
     <section>
-      <div className={styles.titleAndSearchBox}>
-        <h2 className={styles.title}>Rated movies</h2>
-        <TextInput
-          radius="md"
-          h={46}
-          leftSection={<IconSearch size={18} color="#ACADB9" />}
-          rightSectionWidth={88}
-          rightSection={<ButtonCmpon />}
-          className={styles.search}
-          value={value}
-          onChange={event => setValue(event.currentTarget.value)}
-        />
-      </div>
-      <div className={styles.wrap}>
-        <ListOfMovies  dataForListOfMovies={sortedMovie} />
-        <PaginationComponent allPages={allPages} page={page} setPage={setPage} />
-      </div>
+      {ratedMovies.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <>
+          <div className={styles.titleAndSearchBox}>
+            <h2 className={styles.title}>Rated movies</h2>
+            <TextInput
+              placeholder="Search movie title"
+              radius="md"
+              h={46}
+              leftSection={<IconSearch size={18} color="#ACADB9" />}
+              rightSectionWidth={88}
+              rightSection={<ButtonCmpon />}
+              className={styles.search}
+              value={value}
+              onChange={event => setValue(event.currentTarget.value)}
+            />
+          </div>
+          <div className={styles.wrap}>
+            <ListOfMovies dataForListOfMovies={sortedMovie} />
+            <PaginationComponent allPages={allPages} page={page} setPage={setPage} />
+          </div>
+        </>
+      )}
     </section>
   );
 }

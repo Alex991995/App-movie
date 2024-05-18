@@ -1,0 +1,12 @@
+.wrapperEmptyState {
+  min-height: 100vh;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleEmptyState {
+  margin: 0 0 10px 0;
+}

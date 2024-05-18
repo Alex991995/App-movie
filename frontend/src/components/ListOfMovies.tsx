@@ -10,6 +10,7 @@ import ModalComponent from './ModalComponent';
 import { useEffect, useState } from 'react';
 import { selectGenres } from '../features/slices/genresSlice';
 import { useNavigate } from 'react-router-dom';
+import SingleMovie from './SingleMovie';
 
 interface ListOfMoviesProps {
   dataForListOfMovies: IforListOfMovies[] | undefined;
@@ -27,7 +28,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
     setChosenMovie(item);
     open();
   }
-  console.log(chosenMovie);
+
   function color(id: number) {
     return ratedMovies.some(item => item.id === id);
   }
@@ -72,7 +73,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
 
     return `(${formattedNumber})`;
   }
-  // className={styles.loader}
+
   return (
     <>
       {loading ? (
@@ -84,7 +85,6 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
           {dataForListOfMovies?.map(item => (
             <li className={styles.oneMovie} key={item.id}>
               <Link className={styles.boxInfoMovie} to={`${item.id}`}>
-                {/* <div className={styles.boxInfoMovie}> */}
                 <AspectRatio>
                   {item.poster_path === '' ? (
                     <div className={styles.noPoster}>
@@ -134,19 +134,13 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
 
                   <span>{findRating(item.id)}</span>
                 </div>
-                {/* </div> */}
               </Link>
             </li>
           ))}
         </ul>
       )}
 
-      <ModalComponent
-      
-        chosenMovie={chosenMovie}
-        opened={opened}
-        close={close}
-      />
+      <ModalComponent chosenMovie={chosenMovie} opened={opened} close={close} />
     </>
   );
 }
