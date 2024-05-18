@@ -2,6 +2,7 @@ import React from 'react';
 import { pagesCutting, range } from '../helpers/functionHelpers';
 import styles from '../styles/Pagination.module.css';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { IforListOfMovies } from '../features/types';
 
 interface PaginationComponentProps {
   allPages: number;
@@ -17,8 +18,11 @@ function PaginationComponent({ allPages, page, setPage }: PaginationComponentPro
   }
 
   function fetchSpecificPage(page: number) {
-    setPage(page);
+    if (allPages >= page) {
+      setPage(page);
+    }
   }
+
   function nextPage() {
     setPage(prev => prev + 1);
   }
@@ -38,7 +42,7 @@ function PaginationComponent({ allPages, page, setPage }: PaginationComponentPro
         </button>
       ))}
       <button disabled={page === allPages && true} className={styles.button} onClick={nextPage}>
-        <IconChevronRight color="#7B7C88" size={16} />
+        <IconChevronRight color={page === allPages ? '#D5D6DC ' : '#7B7C88'} size={16} />
       </button>
     </div>
   );

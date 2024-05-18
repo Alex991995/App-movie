@@ -9,7 +9,7 @@ import { useDisclosure } from '@mantine/hooks';
 import ModalComponent from './ModalComponent';
 import { useEffect, useState } from 'react';
 import { selectGenres } from '../features/slices/genresSlice';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 interface ListOfMoviesProps {
   dataForListOfMovies: IforListOfMovies[] | undefined;
@@ -21,14 +21,13 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const ratedMovies = useAppSelector(selectRating);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
-   
 
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
     e.preventDefault();
     setChosenMovie(item);
     open();
   }
-
+  console.log(chosenMovie);
   function color(id: number) {
     return ratedMovies.some(item => item.id === id);
   }
@@ -55,79 +54,86 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
     return res;
   }
 
-  function isZeroAtEnd(num:number ) {
-    if(num === 10) return num
-    const fixedOne = num.toFixed(1)
-   
-    if(fixedOne.slice(-1) === "0"){
-      return fixedOne.slice(0,1)
+  function isZeroAtEnd(num: number) {
+    if (num === 10) return num;
+    const fixedOne = num.toFixed(1);
+
+    if (fixedOne.slice(-1) === '0') {
+      return fixedOne.slice(0, 1);
     }
-    return  fixedOne
+    return fixedOne;
   }
 
-  function formatedNumber(num:number) {
+  function formatedNumber(num: number) {
     const formattedNumber = new Intl.NumberFormat('en-US', {
       notation: 'compact',
-      compactDisplay: 'short'
-  }).format(num); 
-  
-  return  `(${formattedNumber})`
-  }
+      compactDisplay: 'short',
+    }).format(num);
 
+    return `(${formattedNumber})`;
+  }
+  // className={styles.loader}
   return (
     <>
       {loading ? (
-        <Loader size="xl" style={{ position: 'absolute', top: '50%', left: '50%' }} />
+        <div className={styles.loader}>
+          <Loader size="xl" />
+        </div>
       ) : (
         <ul className={styles.listMovie}>
           {dataForListOfMovies?.map(item => (
-            <li className={styles.oneMovie} key={item.id} >
-              <Link className={styles.boxInfoMovie}  to={`${item.id}`}>
+            <li className={styles.oneMovie} key={item.id}>
+              <Link className={styles.boxInfoMovie} to={`${item.id}`}>
                 {/* <div className={styles.boxInfoMovie}> */}
-                  <AspectRatio>
-                    {item.poster_path === '' ? (
-                      <div className={styles.noPoster}>
-                        <div>
-                          <IconPhotoOff size={24} strokeWidth={2} color='#ACADB9' />
-                        </div>
-                        <p style={{margin: 0}}> No Poster</p>
+                <AspectRatio>
+                  {item.poster_path === '' ? (
+                    <div className={styles.noPoster}>
+                      <div>
+                        <IconPhotoOff size={24} strokeWidth={2} color="#ACADB9" />
                       </div>
-                    ) : (
-                      <Image
-                        w="120px"
-                        h="170px"
-                        fit="contain"
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        alt="Poster Movie"
-                      />
-                    )}
-                  </AspectRatio>
-
-                  <div className={styles.textMovie}>
-                    <div>
-                      <h4 className={styles.titleMovie}>{item.original_title}</h4>
-                      <span style={{color:"#7B7C88", margin: '8px 0 8px 0'}} >{item.release_date.slice(0, 4)}</span>
-                      <div style={{display: 'flex'}}>
-                        <IconStarFilled color="#FAB005" />
-                        <span style={{color:"#000000", fontWeight: 600, margin: '0 8px 0 4px'}}>{isZeroAtEnd(item.vote_average)}</span>
-                        <span style={{color:'#7B7C88'}}>{formatedNumber(item.vote_count) }</span>
-                      </div> 
+                      <p style={{ margin: 0 }}> No Poster</p>
                     </div>
-                    <div>
-                      <p className={styles.listGenres}>
-                        <span style={{display: 'inline', color:'#7B7C88'}} >Genres </span>{getNameGenres(item.genre_ids)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className={styles.boxIcon}>
-                    <IconStarFilled
-                      color={color(item.id) ? '#9854F6' : '#D5D6DC'}
-                      onClick={e => callModal(e, item)}
+                  ) : (
+                    <Image
+                      w="120px"
+                      h="170px"
+                      fit="contain"
+                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      alt="Poster Movie"
                     />
+                  )}
+                </AspectRatio>
 
-                    <span>{findRating(item.id)}</span>
+                <div className={styles.textMovie}>
+                  <div>
+                    <h4 className={styles.titleMovie}>{item.original_title}</h4>
+                    <span style={{ color: '#7B7C88', margin: '8px 0 8px 0' }}>
+                      {item.release_date.slice(0, 4)}
+                    </span>
+                    <div style={{ display: 'flex' }}>
+                      <IconStarFilled color="#FAB005" />
+                      <span style={{ color: '#000000', fontWeight: 600, margin: '0 8px 0 4px' }}>
+                        {isZeroAtEnd(item.vote_average)}
+                      </span>
+                      <span style={{ color: '#7B7C88' }}>{formatedNumber(item.vote_count)}</span>
+                    </div>
                   </div>
+                  <div>
+                    <p className={styles.listGenres}>
+                      <span style={{ display: 'inline', color: '#7B7C88' }}>Genres </span>
+                      {getNameGenres(item.genre_ids)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.boxIcon}>
+                  <IconStarFilled
+                    color={color(item.id) ? '#9854F6' : '#D5D6DC'}
+                    onClick={e => callModal(e, item)}
+                  />
+
+                  <span>{findRating(item.id)}</span>
+                </div>
                 {/* </div> */}
               </Link>
             </li>
@@ -135,7 +141,12 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
         </ul>
       )}
 
-      <ModalComponent chosenMovie={chosenMovie} opened={opened} close={close} />
+      <ModalComponent
+      
+        chosenMovie={chosenMovie}
+        opened={opened}
+        close={close}
+      />
     </>
   );
 }

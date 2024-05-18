@@ -67,6 +67,9 @@ function AllMovies() {
   return (
     <section>
       <h1 className={styles.titleHome} >Movies</h1>
+     
+
+      
       <div className={styles.boxFilter}>
         <MultiSelector setGenresId={setGenresId} genres={genres} setGenres={setGenres} />
         <SelectorYear year={year} setValueYear={setValueYear} />
@@ -82,7 +85,7 @@ function AllMovies() {
 
         <SelectorSort setNameSortId={setNameSortId} />
       </div>
-
+      <div className={styles.wrap}>
       {movies?.results.length === 0 ? (
         <MovieNotFound />
       ) : (
@@ -96,6 +99,7 @@ function AllMovies() {
           </div>
         </div>
       )}
+      </div>
     </section>
   );
 }

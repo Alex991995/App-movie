@@ -8,6 +8,7 @@ interface IModalComponent {
   opened: boolean;
   close: () => void;
   chosenMovie: IforListOfMovies | undefined;
+  
 }
 
 function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
@@ -36,7 +37,7 @@ function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
   return (
     <>
       <Modal opened={opened} onClose={close}>
-        <Rating value={value} onChange={setValue} size={28} count={10} />
+        <Rating defaultValue={value} onChange={setValue} size={28} count={10} />
         <Button color="#9854F6" onClick={storeRatedMovie}>
           Save
         </Button>

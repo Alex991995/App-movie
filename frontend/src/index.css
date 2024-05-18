@@ -63,21 +63,16 @@ body {
   font-weight: 400;
   font-size: 14px;
 }
-/* .mantine-MultiSelect-pill::after{
-  content: ',';
+
+.mantine-Input-wrapper {
+  height: 100%;
 }
-.mantine-MultiSelect-pill:last-child{
-  content: ' ';
-} */
-
-/* .mantine-Pagination-control:nth-last-child(2){
-  display: none;
-} */
-/* .mantine-Pagination-control:nth-child(1){
-  display: none;
-} */
-
-
+._wrap_1o6ls_1 ._listMovie_ccujp_1{
+  align-self: start;
+}
+.mantine-Input-input{
+  height: 100%;
+}
 
 .mantine-Pill-remove{
   display: none;
