@@ -45,7 +45,7 @@ function Movie() {
       dispatch(fetchSingleMovie(movie_id));
     }
   }, [dispatch]);
-
+console.log(singleMovie)
   return (
     <>
       <section>

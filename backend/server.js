@@ -20,7 +20,7 @@ app.use(
     changeOrigin: true,
     pathRewrite: (path, req) => {
       const { movie_id } = req.params;
-      return `/movie/${movie_id}?language=en-US&api_key=${API_KEY}`;
+      return `/movie/${movie_id}?language=en-US&append_to_response=videos&api_key=${API_KEY}`;
     },
   }),
 );
@@ -36,7 +36,6 @@ app.use(
   }),
 );
 
-//
 
 app.use(
   '/api/movies',
@@ -46,7 +45,12 @@ app.use(
     pathRewrite: (path, req) => {
       const voteLte = req.query.vote_average_lte;
       const voteGte = req.query.vote_average_gte;
-
+      if(voteGte && voteLte){
+         if(+voteGte > +voteLte){
+         throw new Error('Chose another value')
+      }
+      }
+     
       const objQueryParams = {
         include_adult: 'false',
         include_video: 'false',

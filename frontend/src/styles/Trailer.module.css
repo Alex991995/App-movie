@@ -1,11 +1,27 @@
-.boxTrailer{
-
+.mainBoxTrailer {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+}
+.boxTrailer {
+  /* padding: 24px; */
 }
 
-.description{
+.description {
+  /* padding: 24px; */
 
+  & .descriptionTrailer {
+    margin-top: 0;
+    font-size: 20px;
+    line-height: 20px;
+  }
+  & .descriptionParagraph {
+    line-height: 22.4px;
+  }
 }
 
-.production{
-  
+.production {
+  /* padding: 24px; */
 }

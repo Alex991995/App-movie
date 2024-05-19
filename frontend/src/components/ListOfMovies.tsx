@@ -43,10 +43,12 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   }
 
   function getNameGenres(genres: number[]) {
+    if(!genres) return ''
     const res = [];
     if (genresStored?.genres) {
       for (let i = 0; i < genresStored.genres.length; i++) {
         if (genres.includes(genresStored.genres[i].id)) {
+          console.log()
           res.push(genresStored.genres[i].name, ', ');
         }
       }

@@ -78,6 +78,9 @@ body {
 .mantine-Pagination-dots {
   display: none;
 }
+iframe {
+  border-radius: 9px;
+}
 
 a {
   text-decoration: none;
