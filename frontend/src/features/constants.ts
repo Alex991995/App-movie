@@ -67,3 +67,59 @@ for (let i = 1950; i <= 2024; i++) {
 for (let i = 1; i <= 10; i++) {
   arrNumbers.push(i);
 }
+
+type months = {
+  number: string;
+  month: string;
+}
+
+export const months:months[] = [
+  {
+    number:'01',
+    month: 'January'
+  },
+  {
+    number:'02',
+    month: 'February'
+  },
+  {
+    number:'03',
+    month: 'March'
+  },
+  {
+    number:'04',
+    month: 'April'
+  },
+  {
+    number:'05',
+    month: 'May'
+  },
+  {
+    number:'06',
+    month: 'June'
+  },
+  {
+    number:'07',
+    month: 'July'
+  },
+  {
+    number:'08',
+    month: 'August'
+  },
+  {
+    number:'09',
+    month: 'September'
+  },
+  {
+    number:'10',
+    month: 'October'
+  },
+  {
+    number:'11',
+    month: 'November'
+  },
+  {
+    number:'12',
+    month: 'December'
+  }
+]

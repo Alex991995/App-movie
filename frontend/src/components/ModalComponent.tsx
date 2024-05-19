@@ -1,34 +1,47 @@
 import { Button, Modal, Rating } from '@mantine/core';
-import { useState } from 'react';
-import { IforListOfMovies } from '../features/types';
-import { addRatedMovies, removeRatedMovie } from '../features/slices/moviesSlice';
-import { useAppDispatch } from '../features/hooks/reduxHooks';
+import { useEffect, useState } from 'react';
+import { INformationAbMovie, IforListOfMovies } from '../features/types';
+import { addRatedMovies, removeRatedMovie, selectRating } from '../features/slices/moviesSlice';
+import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 
 interface IModalComponent {
   opened: boolean;
   close: () => void;
-  chosenMovie: IforListOfMovies | undefined;
-  
+  movie: IforListOfMovies | INformationAbMovie | undefined;
 }
 
-function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
+function ModalComponent({ opened, close, movie }: IModalComponent) {
   const dispatch = useAppDispatch();
+
+  const ratedMovies = useAppSelector(selectRating);
   const [value, setValue] = useState(0);
 
+  // useEffect(() => {
+  // const rating =  ratedMovies.find(item => item.id === movie?.id);
+
+  //   setValue( () => rating?.rating || 0);
+  //   console.log(value)
+  // },[movie]);
+
+  // function name() {
+  
+  // }
+
+
+
   function storeRatedMovie() {
-    if (chosenMovie) {
-      const changedChosenMovie: IforListOfMovies = Object.assign({ ...chosenMovie, rating: value });
+    if (movie) {
+      const changedChosenMovie: IforListOfMovies = Object.assign({ ...movie, rating: value });
       console.log(changedChosenMovie);
       dispatch(addRatedMovies(changedChosenMovie));
     }
     setValue(0);
     close();
   }
-  
 
   function removeMovie() {
-    if(chosenMovie?.id) {
-       dispatch(removeRatedMovie(chosenMovie?.id))
+    if (movie?.id) {
+      dispatch(removeRatedMovie(movie?.id));
     }
     setValue(0);
     close();
@@ -41,7 +54,9 @@ function ModalComponent({ opened, close, chosenMovie }: IModalComponent) {
         <Button color="#9854F6" onClick={storeRatedMovie}>
           Save
         </Button>
-        <Button onClick={removeMovie} variant="subtle">Remove rating</Button>
+        <Button onClick={removeMovie} variant="subtle">
+          Remove rating
+        </Button>
       </Modal>
     </>
   );

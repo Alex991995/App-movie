@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { selectMovies } from '../features/slices/moviesSlice';
+import { selectError, selectMovies } from '../features/slices/moviesSlice';
 import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { fetchMovies } from '../features/slices/acyncThunck';
 import { IforListOfMovies } from '../features/types';
@@ -16,6 +16,7 @@ import PaginationComponent from '../components/PaginationComponent';
 
 function AllMovies() {
   const movies = useAppSelector(selectMovies);
+  const errorFetchData = useAppSelector(selectError);
   const dispatch = useAppDispatch();
 
   const [genresId, setGenresId] = useState<number[]>([]);
@@ -59,10 +60,18 @@ function AllMovies() {
     page: String(page),
     with_genres: genresId.join(','),
   };
+  useEffect(() => {
+    if (errorFetchData) setError(true);
+    else setError(false);
+  }, [errorFetchData]);
 
   useEffect(() => {
     dispatch(fetchMovies(userData));
   }, [genresId, nameSortId, year, ratingTo, ratingFrom, page]);
+
+
+
+
 
   return (
     <section>
@@ -85,7 +94,12 @@ function AllMovies() {
         <SelectorSort setNameSortId={setNameSortId} />
       </div>
       <div className={styles.wrap}>
-        {movies?.results.length === 0 ? (
+       
+        {errorFetchData ? (
+          // if gets error from server shows MovieNotFound
+          <MovieNotFound />
+        ) : movies?.results.length === 0 ? (
+          // if there aren't any movies by filters shows MovieNotFound
           <MovieNotFound />
         ) : (
           <div className={styles.wrapperMovieAndPagination}>

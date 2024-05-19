@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from '../styles/ListOfMovies.module.css';
 import { AspectRatio, Image, Loader } from '@mantine/core';
 import { useAppSelector } from '../features/hooks/reduxHooks';
-import { selectLoading, selectRating } from '../features/slices/moviesSlice';
+import { selectError, selectLoading, selectRating } from '../features/slices/moviesSlice';
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import ModalComponent from './ModalComponent';
@@ -18,6 +18,7 @@ interface ListOfMoviesProps {
 
 function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const loading = useAppSelector(selectLoading);
+  const errorFetchData =  useAppSelector(selectError);
   const genresStored = useAppSelector(selectGenres);
   const [opened, { open, close }] = useDisclosure(false);
   const ratedMovies = useAppSelector(selectRating);
@@ -76,6 +77,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
 
   return (
     <>
+      
       {loading ? (
         <div className={styles.loader}>
           <Loader size="xl" />
@@ -140,7 +142,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
         </ul>
       )}
 
-      <ModalComponent chosenMovie={chosenMovie} opened={opened} close={close} />
+      <ModalComponent movie={chosenMovie} opened={opened} close={close} />
     </>
   );
 }

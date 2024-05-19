@@ -1,6 +1,12 @@
 .wrapperMovie {
   display: grid;
   grid-template-columns: minmax(auto, 800px);
-  grid-template-rows: minmax(auto, 400px);
+  margin-top: 20px;
+
+}
+@media  (max-width: 943px) {
+  .wrapperMovie { 
+    justify-items: center
+  }
 
 }

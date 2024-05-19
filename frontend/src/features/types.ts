@@ -34,7 +34,7 @@ export interface fetchMoviesProps {
 export interface IMoviesSlice {
   movies: Root | undefined;
   loading: boolean;
-  error: boolean;
+  error: null | string;
   singleMovie: INformationAbMovie | undefined;
   ratedMovies: IforListOfMovies[];
 }
