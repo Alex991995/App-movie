@@ -81,25 +81,24 @@ export interface INformationAbMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  videos: Videos
+  videos: Videos;
 }
 
 export interface Videos {
-  results: Result[]
+  results: Result[];
 }
 export interface Result {
-  iso_639_1: string
-  iso_3166_1: string
-  name: string
-  key: string
-  site: string
-  size: number
-  type: string
-  official: boolean
-  published_at: string
-  id: string
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
 }
-
 
 export interface Genre {
   id: number;
@@ -133,5 +132,5 @@ export interface IforListOfMovies {
   vote_count: number;
   genre_ids?: number[];
   genres?: Genre[];
-  rating: number
+  rating: number;
 }

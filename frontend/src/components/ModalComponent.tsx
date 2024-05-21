@@ -1,4 +1,4 @@
-import { Button, Modal, Rating } from '@mantine/core';
+import { Button, Divider, Modal, Rating } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { INformationAbMovie, IforListOfMovies } from '../features/types';
 import { addRatedMovies, removeRatedMovie, selectRating } from '../features/slices/moviesSlice';
@@ -24,10 +24,8 @@ function ModalComponent({ opened, close, movie }: IModalComponent) {
   // },[movie]);
 
   // function name() {
-  
+
   // }
-
-
 
   function storeRatedMovie() {
     if (movie) {
@@ -49,14 +47,19 @@ function ModalComponent({ opened, close, movie }: IModalComponent) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close}>
-        <Rating defaultValue={value} onChange={setValue} size={28} count={10} />
-        <Button color="#9854F6" onClick={storeRatedMovie}>
-          Save
-        </Button>
-        <Button onClick={removeMovie} variant="subtle">
-          Remove rating
-        </Button>
+      <Modal title={'Your rating'}  radius="md" opened={opened} onClose={close}>
+        {/* <h3 style={{margin: '16px', fontWeight: 400, display: 'inline'}}>Your rating</h3> */}
+        <Divider px={0} />
+        <div >
+          <h3>{movie?.original_title}</h3>
+          <Rating style={{justifyContent: 'space-between'}}  w='100%' defaultValue={value} onChange={setValue} size='xl' count={10} mb={16}/>
+          <Button radius="md" color="#9854F6" onClick={storeRatedMovie}>
+            Save
+          </Button>
+          <Button color="#9854F6" onClick={removeMovie} variant="subtle">
+            Remove rating
+          </Button>
+        </div>
       </Modal>
     </>
   );

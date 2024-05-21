@@ -6,19 +6,12 @@
   align-items: flex-end;
   gap: 16px;
 }
-.titleHome{
+.titleHome {
   font-size: 32px;
-
 }
 .boxButtonReset {
   display: flex;
 }
-
-/* .wrap {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-} */
 
 .buttonReset {
   width: fit-content;
@@ -67,7 +60,7 @@
   .boxButtonReset {
     justify-content: center;
   }
-  .titleHome{
+  .titleHome {
     text-align: center;
   }
 }

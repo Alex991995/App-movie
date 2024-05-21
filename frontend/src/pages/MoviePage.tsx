@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { selectOneMovie } from '../features/slices/moviesSlice';
 import { fetchSingleMovie } from '../features/slices/acyncThunck';
 import styles from '../styles/MoviePage.module.css';
 import { Anchor, Breadcrumbs } from '@mantine/core';
-import { useDisclosure, useSetState } from '@mantine/hooks';
+import { useDisclosure } from '@mantine/hooks';
 import SingleMovie from '../components/SingleMovie';
 import ModalComponent from '../components/ModalComponent';
 import Trailer from '../components/Trailer';
@@ -45,16 +45,17 @@ function Movie() {
       dispatch(fetchSingleMovie(movie_id));
     }
   }, [dispatch]);
-console.log(singleMovie)
+
   return (
     <>
       <section>
-        <Breadcrumbs style={{flexWrap: 'wrap'}} mt={40}>{items}</Breadcrumbs>
+        <Breadcrumbs style={{ flexWrap: 'wrap' }} mt={40}>
+          {items}
+        </Breadcrumbs>
         <div className={styles.wrapperMovie}>
           <SingleMovie openModal={open} singleMovie={singleMovie} />
-          <Trailer singleMovie={singleMovie}/>
+          <Trailer singleMovie={singleMovie} />
         </div>
-
       </section>
       <ModalComponent movie={singleMovie} opened={opened} close={close} />
     </>

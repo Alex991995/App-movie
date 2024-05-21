@@ -5,13 +5,8 @@
   border-radius: 12px;
   padding: 24px;
 }
-.boxTrailer {
-  /* padding: 24px; */
-}
 
 .description {
-  /* padding: 24px; */
-
   & .descriptionTrailer {
     margin-top: 0;
     font-size: 20px;
@@ -21,7 +16,14 @@
     line-height: 22.4px;
   }
 }
+.nameStudio {
+  font-weight: 700;
+  line-height: 22.4px;
+}
 
-.production {
-  /* padding: 24px; */
+.logoItem {
+  display: flex;
+  list-style: none;
+  gap: 8px;
+  align-items: center;
 }

@@ -5,9 +5,10 @@
   gap: 16px;
   padding-left: 0;
   margin-top: 24px;
+  align-items: center;
 }
 
-.loader{
+.loader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,8 +23,6 @@
 }
 .wrappInformationMovie {
   display: flex;
-  /* grid-template-columns: minmax(auto, 150px) minmax(auto, 100%); */
-  /* grid-template-rows: 100px; */
   gap: 8px;
 }
 .info {
@@ -34,9 +33,6 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-  /* & * {
-    display: block;
-  } */
 
   & .titleMovie {
     color: #9854f6;
@@ -70,13 +66,9 @@
   .listMovie {
     grid-template-columns: 1fr;
   }
-   .oneMovie{
+  .oneMovie {
     flex-direction: column;
     align-items: center;
-    
-  } 
-  .boxIcon{
-   
   }
 }
 
@@ -85,7 +77,6 @@
     column-gap: 4px;
   }
   .oneMovie {
-    padding: 8px 2px 8px 2px;
+    padding: 24px;
   }
-  
 }

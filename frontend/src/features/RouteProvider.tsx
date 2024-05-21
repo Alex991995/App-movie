@@ -14,7 +14,6 @@ function RouteProvider({ children }: { children: JSX.Element | JSX.Element[] }) 
     return <ComponentNotFound />;
   }
 
-
   return <>{children}</>;
 }
 

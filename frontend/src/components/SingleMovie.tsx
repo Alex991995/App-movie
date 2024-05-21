@@ -1,6 +1,4 @@
-import React from 'react';
 import styles from '../styles/SingleMovie.module.css';
-import { Link } from 'react-router-dom';
 import { AspectRatio, Image } from '@mantine/core';
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
 import { Genre, INformationAbMovie, IforListOfMovies } from '../features/types';
@@ -16,7 +14,6 @@ interface ISingleMovie {
 
 function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
   const ratedMovies = useAppSelector(selectRating);
-  const genresStored = useAppSelector(selectGenres);
 
   function isRated(id: number) {
     return ratedMovies.some(item => item.id === id);
@@ -43,7 +40,7 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
       return result;
     }
   }
-  // console.log(convertGenres(singleMovie.genres));
+
   function convertGenres(genres: Genre[]) {
     const res = genres.map((genre, index) => {
       if (index + 1 === genres.length) return genre.name;
@@ -121,7 +118,7 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
           <div className={styles.textMovie}>
             <div>
               <h4 className={styles.titleMovie}>{singleMovie.original_title}</h4>
-              <span style={{ color: '#7B7C88', margin: '8px 0 8px 0' }}>
+              <span style={{ color: '#7B7C88', margin: '8px 0 8px 0', display: 'block' }}>
                 {singleMovie.release_date.slice(0, 4)}
               </span>
               <div style={{ display: 'flex' }}>

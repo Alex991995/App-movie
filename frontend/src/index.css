@@ -60,6 +60,10 @@ body {
   font-weight: 400;
   font-size: 14px;
 }
+.mantine-Select-label,
+.mantine-MultiSelect-label {
+  margin-bottom: 8px;
+}
 
 .mantine-Input-wrapper {
   height: 100%;
@@ -101,7 +105,7 @@ a {
 }
 
 @media (max-width: 943px) {
-  .mantine-Breadcrumbs-root{
+  .mantine-Breadcrumbs-root {
     justify-content: center;
   }
 }

@@ -16,7 +16,6 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
   const dispatch = useAppDispatch();
 
   const [chosenGenres, setChosenGenres] = useState<string[] | undefined>(undefined);
-  // console.log( ss)
 
   useEffect(() => {
     setChosenGenres(

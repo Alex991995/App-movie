@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { arrNumbers } from '../features/constants';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 
-
 interface SelectorsRatingProps {
   setRatingFrom: React.Dispatch<React.SetStateAction<string | null>>;
   setRatingTo: React.Dispatch<React.SetStateAction<string | null>>;

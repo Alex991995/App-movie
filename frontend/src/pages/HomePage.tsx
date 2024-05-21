@@ -69,10 +69,6 @@ function AllMovies() {
     dispatch(fetchMovies(userData));
   }, [genresId, nameSortId, year, ratingTo, ratingFrom, page]);
 
-
-
-
-
   return (
     <section>
       <h1 className={styles.titleHome}>Movies</h1>
@@ -94,7 +90,6 @@ function AllMovies() {
         <SelectorSort setNameSortId={setNameSortId} />
       </div>
       <div className={styles.wrap}>
-       
         {errorFetchData ? (
           // if gets error from server shows MovieNotFound
           <MovieNotFound />

@@ -7,10 +7,8 @@ import { selectError, selectLoading, selectRating } from '../features/slices/mov
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import ModalComponent from './ModalComponent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { selectGenres } from '../features/slices/genresSlice';
-import { useNavigate } from 'react-router-dom';
-import SingleMovie from './SingleMovie';
 
 interface ListOfMoviesProps {
   dataForListOfMovies: IforListOfMovies[] | undefined;
@@ -24,15 +22,13 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const ratedMovies = useAppSelector(selectRating);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
 
-  
-
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
     e.preventDefault();
     setChosenMovie(item);
     open();
   }
 
-  function color(id: number) {
+  function isRatedColor(id: number) {
     return ratedMovies.some(item => item.id === id);
   }
 
@@ -44,36 +40,49 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
     }
   }
 
-  function f(genres: Genre[] | undefined) {
-    if(genres){
-      return genres.map(item => <span>{item.name}</span>)
+  function displayGenres(genres: Genre[] | undefined) {
+    let res = [];
+    if (genres) {
+      for (let i = 0; i < genres.length; i++) {
+        res.push(`${genres[i].name},`);
+      }
     }
-    
+    const formattedResult = deleteLastComma(res);
+    return formattedResult;
   }
 
   function getNameGenres(genres: number[] | undefined) {
-    if(!genres) return undefined
-  
+    if (!genres) return undefined;
+
     const res = [];
     if (genres) {
       if (genresStored?.genres) {
         for (let i = 0; i < genresStored.genres.length; i++) {
           if (genres.includes(genresStored.genres[i].id)) {
-            console.log();
-            res.push(genresStored.genres[i].name, ', ');
+            res.push(` ${genresStored.genres[i].name},`);
           }
         }
       }
 
-      res.splice(-1);
-      return res;
+      const formattedResult = deleteLastComma(res);
+      return formattedResult;
     }
+  }
+
+  function deleteLastComma(array: string[]) {
+    const res = array.map((item, index) => {
+      if (index === array.length - 1) {
+        item = item.slice(0, -1);
+        return item;
+      }
+      return item;
+    });
+    return res;
   }
 
   function isZeroAtEnd(num: number) {
     if (num === 10) return num;
     const fixedOne = num.toFixed(1);
-
     if (fixedOne.slice(-1) === '0') {
       return fixedOne.slice(0, 1);
     }
@@ -135,16 +144,20 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                   </div>
                   <div>
                     <p className={styles.listGenres}>
-                      <span style={{ display: 'inline', color: '#7B7C88' }}>Genres </span>
-                      { f(item.genres || undefined) } 
-                      { getNameGenres(item.genre_ids || undefined)  }
+                      <span style={{ display: 'inline', color: '#7B7C88' }}>Genres</span>
+                      {displayGenres(item.genres || undefined)?.map(item => (
+                        <span>{item}</span>
+                      ))}
+                      {getNameGenres(item.genre_ids || undefined)?.map(item => (
+                        <span>{item}</span>
+                      ))}
                     </p>
                   </div>
                 </div>
 
                 <div className={styles.boxIcon}>
                   <IconStarFilled
-                    color={color(item.id) ? '#9854F6' : '#D5D6DC'}
+                    color={isRatedColor(item.id) ? '#9854F6' : '#D5D6DC'}
                     onClick={e => callModal(e, item)}
                   />
 

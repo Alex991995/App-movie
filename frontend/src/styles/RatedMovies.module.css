@@ -1,20 +1,29 @@
 .wrap {
-  min-height: 100vh;
   display: grid;
-  grid-template-rows: minmax(482px, auto) 1fr;
+  grid-template-rows: minmax(482px, auto) minmax(82px, auto);
+  grid-template-columns: minmax(100%, auto);
 }
 
 .titleAndSearchBox {
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-between;
 }
-.title{
+.title {
   flex: 50%;
 }
 .search {
   flex: 50%;
 }
-.wrap .listMovie{
-  align-self: start;
+
+@media (max-width: 980px) {
+  .wrap {
+    grid-template-rows: 1fr;
+  }
+}
+
+@media (max-width: 950px) {
+  .titleAndSearchBox {
+    flex-direction: column;
+  }
 }

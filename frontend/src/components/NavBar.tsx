@@ -2,13 +2,8 @@ import { Button } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 import styles from '../styles/navbar.module.css';
 import Icon from '../assets/Arrow-icon.svg';
-import { useDisclosure } from '@mantine/hooks';
 
 function NavBar() {
-  // const [opened, { toggle }] = useDisclosure();
-
-  
- 
   return (
     <div className={styles.navbar}>
       <div className={styles.boxLogo}>

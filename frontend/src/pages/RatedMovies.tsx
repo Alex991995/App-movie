@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../features/hooks/reduxHooks';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../features/hooks/reduxHooks';
 import { selectRating } from '../features/slices/moviesSlice';
 import ListOfMovies from '../components/ListOfMovies';
 import PaginationComponent from '../components/PaginationComponent';
