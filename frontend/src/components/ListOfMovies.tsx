@@ -1,4 +1,4 @@
-import { IforListOfMovies } from '../features/types';
+import { Genre, IforListOfMovies } from '../features/types';
 import { Link } from 'react-router-dom';
 import styles from '../styles/ListOfMovies.module.css';
 import { AspectRatio, Image, Loader } from '@mantine/core';
@@ -18,11 +18,13 @@ interface ListOfMoviesProps {
 
 function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const loading = useAppSelector(selectLoading);
-  const errorFetchData =  useAppSelector(selectError);
+  const errorFetchData = useAppSelector(selectError);
   const genresStored = useAppSelector(selectGenres);
   const [opened, { open, close }] = useDisclosure(false);
   const ratedMovies = useAppSelector(selectRating);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
+
+  
 
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
     e.preventDefault();
@@ -42,20 +44,30 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
     }
   }
 
-  function getNameGenres(genres: number[]) {
-    if(!genres) return ''
+  function f(genres: Genre[] | undefined) {
+    if(genres){
+      return genres.map(item => <span>{item.name}</span>)
+    }
+    
+  }
+
+  function getNameGenres(genres: number[] | undefined) {
+    if(!genres) return undefined
+  
     const res = [];
-    if (genresStored?.genres) {
-      for (let i = 0; i < genresStored.genres.length; i++) {
-        if (genres.includes(genresStored.genres[i].id)) {
-          console.log()
-          res.push(genresStored.genres[i].name, ', ');
+    if (genres) {
+      if (genresStored?.genres) {
+        for (let i = 0; i < genresStored.genres.length; i++) {
+          if (genres.includes(genresStored.genres[i].id)) {
+            console.log();
+            res.push(genresStored.genres[i].name, ', ');
+          }
         }
       }
-    }
 
-    res.splice(-1);
-    return res;
+      res.splice(-1);
+      return res;
+    }
   }
 
   function isZeroAtEnd(num: number) {
@@ -79,7 +91,6 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
 
   return (
     <>
-      
       {loading ? (
         <div className={styles.loader}>
           <Loader size="xl" />
@@ -88,7 +99,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
         <ul className={styles.listMovie}>
           {dataForListOfMovies?.map(item => (
             <li className={styles.oneMovie} key={item.id}>
-              <Link className={styles.boxInfoMovie} to={`${item.id}`}>
+              <Link className={styles.boxInfoMovie} to={`/movies/${item.id}`}>
                 <AspectRatio>
                   {item.poster_path === '' ? (
                     <div className={styles.noPoster}>
@@ -125,7 +136,8 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                   <div>
                     <p className={styles.listGenres}>
                       <span style={{ display: 'inline', color: '#7B7C88' }}>Genres </span>
-                      {getNameGenres(item.genre_ids)}
+                      { f(item.genres || undefined) } 
+                      { getNameGenres(item.genre_ids || undefined)  }
                     </p>
                   </div>
                 </div>
