@@ -5,9 +5,8 @@
       "destination": "https://app-movie-backend.vercel.app/api/:path*"
     },
     {
-      "source": "/",
-      "destination": "/movies",
-      "permanent": true
+      "source": "/movies",
+      "destination": "/index.html"
     }
     
   ]
