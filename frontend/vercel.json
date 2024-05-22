@@ -1,8 +1,17 @@
+
+
+
 {
+  
   "rewrites": [
+
     {
       "source": "/api/:path*",
       "destination": "https://app-movie-backend.vercel.app/api/:path*"
+    },
+    {
+      "source": "https://app-movie-gamma.vercel.app/",
+      "destination": "https://app-movie-gamma.vercel.app/movies"
     }
   ]
 }
