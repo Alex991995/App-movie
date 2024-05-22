@@ -16,21 +16,25 @@ function ModalComponent({ opened, close, movie }: IModalComponent) {
   const ratedMovies = useAppSelector(selectRating);
   const [value, setValue] = useState(0);
 
-  // useEffect(() => {
-  // const rating =  ratedMovies.find(item => item.id === movie?.id);
+  // console.log(value)
 
-  //   setValue( () => rating?.rating || 0);
-  //   console.log(value)
-  // },[movie]);
+  useEffect(() => {
+  const rating =  ratedMovies.find(item => item.id === movie?.id);
+  if(rating?.rating ){
+    console.log('es')
+    setValue(rating.rating);
+  }
+  else setValue(0);
+  },[opened]);
 
   // function name() {
 
   // }
-
+//  console.log(ratedMovies)
+//  console.log(movie)
   function storeRatedMovie() {
     if (movie) {
       const changedChosenMovie: IforListOfMovies = Object.assign({ ...movie, rating: value });
-      console.log(changedChosenMovie);
       dispatch(addRatedMovies(changedChosenMovie));
     }
     setValue(0);
@@ -48,11 +52,10 @@ function ModalComponent({ opened, close, movie }: IModalComponent) {
   return (
     <>
       <Modal title={'Your rating'}  radius="md" opened={opened} onClose={close}>
-        {/* <h3 style={{margin: '16px', fontWeight: 400, display: 'inline'}}>Your rating</h3> */}
         <Divider px={0} />
         <div >
           <h3>{movie?.original_title}</h3>
-          <Rating style={{justifyContent: 'space-between'}}  w='100%' defaultValue={value} onChange={setValue} size='xl' count={10} mb={16}/>
+          <Rating style={{justifyContent: 'space-between'}}  w='100%' value={value} onChange={setValue} size='xl' count={10} mb={16}/>
           <Button radius="md" color="#9854F6" onClick={storeRatedMovie}>
             Save
           </Button>

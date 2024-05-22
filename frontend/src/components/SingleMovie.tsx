@@ -30,13 +30,13 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
   function convertData(data: string) {
     const [year, monthData, day] = data.split('-');
     const findMoth = months.find(month => month.number === monthData);
-    let covertDay: string;
+    let convertDay: string;
 
     if (day.startsWith('0')) {
-      covertDay = day.slice(1);
-    } else covertDay = day;
+      convertDay = day.slice(1);
+    } else convertDay = day;
     if (findMoth) {
-      const result = `${findMoth.month} ${covertDay}, ${year}`;
+      const result = `${findMoth.month} ${convertDay}, ${year}`;
       return result;
     }
   }
@@ -91,20 +91,20 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
     if (res[res.length - 1] === ',') res.pop();
     return '$' + res.reverse().join('');
   }
-
+  
   return (
     <>
       {singleMovie && (
         <li className={styles.oneMovie} key={singleMovie.id}>
-          <AspectRatio>
-            {singleMovie.poster_path === '' ? (
-              <div className={styles.noPoster}>
-                <div>
-                  <IconPhotoOff size={24} strokeWidth={2} color="#ACADB9" />
-                </div>
-                <p style={{ margin: 0 }}> No Poster</p>
+          {singleMovie.poster_path === null ? (
+            <div className={styles.noPoster}>
+              <div>
+                <IconPhotoOff size={24} strokeWidth={2} color="#ACADB9" />
               </div>
-            ) : (
+              <p style={{ margin: 0 }}> No Poster</p>
+            </div>
+          ) : (
+            <AspectRatio>
               <Image
                 w="250px"
                 h="350px"
@@ -112,8 +112,8 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
                 src={`https://image.tmdb.org/t/p/original/${singleMovie.poster_path}`}
                 alt="Poster Movie"
               />
-            )}
-          </AspectRatio>
+            </AspectRatio>
+          )}
 
           <div className={styles.textMovie}>
             <div>

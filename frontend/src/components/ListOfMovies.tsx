@@ -145,11 +145,11 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                   <div>
                     <p className={styles.listGenres}>
                       <span style={{ display: 'inline', color: '#7B7C88' }}>Genres</span>
-                      {displayGenres(item.genres || undefined)?.map(item => (
-                        <span>{item}</span>
+                      {displayGenres(item.genres || undefined)?.map((item, index) => (
+                        <span key={index}>{item}</span>
                       ))}
-                      {getNameGenres(item.genre_ids || undefined)?.map(item => (
-                        <span>{item}</span>
+                      {getNameGenres(item.genre_ids || undefined)?.map((item, index) => (
+                        <span key={index}>{item}</span>
                       ))}
                     </p>
                   </div>

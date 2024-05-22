@@ -14,6 +14,10 @@ function RatedMovies() {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState(ratedMovies);
 
+  useEffect(()=>{
+    setMovies( () => ratedMovies)
+  },[ratedMovies])
+
   function find() {
     setMovies(prev => prev.filter(movie => movie.original_title.includes(value)));
     setPage(1);

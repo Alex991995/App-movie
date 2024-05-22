@@ -41,6 +41,7 @@
 .wrapperMovieAndPagination {
   display: grid;
   grid-template-rows: minmax(482px, auto) 200px;
+  align-items: center;
 }
 
 @media (max-width: 990px) {

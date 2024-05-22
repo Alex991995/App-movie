@@ -63,7 +63,7 @@ export const arrNumbers: number[] = [];
 const currentDate = new Date();
 const year = currentDate.getFullYear();
 
-for (let i = year; i > 0; i--) {
+for (let i = year; i >= 1950; i--) {
   years.push(i);
 }
 

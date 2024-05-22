@@ -9,6 +9,7 @@ import { useDisclosure } from '@mantine/hooks';
 import SingleMovie from '../components/SingleMovie';
 import ModalComponent from '../components/ModalComponent';
 import Trailer from '../components/Trailer';
+import MovieNotFound from '../components/MovieNotFound';
 
 function Movie() {
   const [path, setPath] = useState('');
@@ -48,15 +49,22 @@ function Movie() {
 
   return (
     <>
-      <section>
-        <Breadcrumbs style={{ flexWrap: 'wrap' }} mt={40}>
-          {items}
-        </Breadcrumbs>
-        <div className={styles.wrapperMovie}>
-          <SingleMovie openModal={open} singleMovie={singleMovie} />
-          <Trailer singleMovie={singleMovie} />
+      {singleMovie ? (
+        <section>
+          <Breadcrumbs style={{ flexWrap: 'wrap' }} mt={40}>
+            {items}
+          </Breadcrumbs>
+          <div className={styles.wrapperMovie}>
+            <SingleMovie openModal={open} singleMovie={singleMovie} />
+            <Trailer singleMovie={singleMovie} />
+          </div>
+        </section>
+      ) : (
+        <div style={{display:  'flex', alignItems: "center", height: '100vh'}}>
+          <MovieNotFound />
         </div>
-      </section>
+        
+      )}
       <ModalComponent movie={singleMovie} opened={opened} close={close} />
     </>
   );
