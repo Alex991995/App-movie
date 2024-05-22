@@ -4,10 +4,26 @@
       "source": "/api/:path*",
       "destination": "https://app-movie-backend.vercel.app/api/:path*"
     },
+      {
+      "source": "/",
+      "destination": "/movies",
+      "permanent": true
+    },
     {
       "source": "/movies",
       "destination": "/index.html"
+    },
+    {
+      "source": "/movies/:movie_id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/rated",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-    
   ]
 }
