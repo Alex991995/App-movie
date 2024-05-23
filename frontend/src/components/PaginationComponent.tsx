@@ -1,5 +1,6 @@
 import React from 'react';
 import { pagesCutting, range } from '../helpers/functionHelpers';
+
 import styles from '../styles/Pagination.module.css';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 

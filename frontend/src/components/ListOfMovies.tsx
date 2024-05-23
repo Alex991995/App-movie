@@ -1,14 +1,17 @@
-import { Genre, IforListOfMovies } from '../features/types';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ModalComponent from './ModalComponent';
+
 import styles from '../styles/ListOfMovies.module.css';
 import { AspectRatio, Image, Loader } from '@mantine/core';
-import { useAppSelector } from '../features/hooks/reduxHooks';
-import { selectError, selectLoading, selectRating } from '../features/slices/moviesSlice';
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import ModalComponent from './ModalComponent';
-import { useState } from 'react';
+
+import { Genre, IforListOfMovies } from '../features/types';
+import { useAppSelector, useAppDispatch } from '../features/hooks/reduxHooks';
+import { selectLoading, selectRating } from '../features/slices/moviesSlice';
 import { selectGenres } from '../features/slices/genresSlice';
+import { fetchGenres } from '../features/slices/acyncThunck';
 
 interface ListOfMoviesProps {
   dataForListOfMovies: IforListOfMovies[] | undefined;
@@ -16,11 +19,16 @@ interface ListOfMoviesProps {
 
 function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   const loading = useAppSelector(selectLoading);
-  const errorFetchData = useAppSelector(selectError);
-  const genresStored = useAppSelector(selectGenres);
-  const [opened, { open, close }] = useDisclosure(false);
+  const allGenres = useAppSelector(selectGenres);
   const ratedMovies = useAppSelector(selectRating);
+  const dispatch = useAppDispatch();
+
+  const [opened, { open, close }] = useDisclosure(false);
   const [chosenMovie, setChosenMovie] = useState<IforListOfMovies | undefined>(undefined);
+
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, [dispatch]);
 
   function callModal(e: React.MouseEvent<SVGSVGElement, MouseEvent>, item: IforListOfMovies) {
     e.preventDefault();
@@ -41,6 +49,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
   }
 
   function displayGenres(genres: Genre[] | undefined) {
+    if (!genres) return undefined;
     let res = [];
     if (genres) {
       for (let i = 0; i < genres.length; i++) {
@@ -56,14 +65,13 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
 
     const res = [];
     if (genres) {
-      if (genresStored?.genres) {
-        for (let i = 0; i < genresStored.genres.length; i++) {
-          if (genres.includes(genresStored.genres[i].id)) {
-            res.push(` ${genresStored.genres[i].name},`);
+      if (allGenres?.genres) {
+        for (let i = 0; i < allGenres.genres.length; i++) {
+          if (genres.includes(allGenres.genres[i].id)) {
+            res.push(` ${allGenres.genres[i].name},`);
           }
         }
       }
-
       const formattedResult = deleteLastComma(res);
       return formattedResult;
     }
@@ -145,6 +153,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                   <div>
                     <p className={styles.listGenres}>
                       <span style={{ display: 'inline', color: '#7B7C88' }}>Genres</span>
+
                       {displayGenres(item.genres || undefined)?.map((item, index) => (
                         <span key={index}>{item}</span>
                       ))}

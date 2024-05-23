@@ -1,5 +1,5 @@
 import { AspectRatio, Image } from '@mantine/core';
-import NotFoundMovie from '../assets/Mask group.png';
+import NotFoundMovie from '../assets/ImageNotFound.png';
 
 function MovieNotFound() {
   return (

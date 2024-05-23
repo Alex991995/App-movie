@@ -1,14 +1,14 @@
+import { useAppSelector } from '../features/hooks/reduxHooks';
+import { selectRating } from '../features/slices/moviesSlice';
+import { months } from '../features/constants';
+
 import styles from '../styles/SingleMovie.module.css';
 import { AspectRatio, Image } from '@mantine/core';
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
-import { Genre, INformationAbMovie, IforListOfMovies } from '../features/types';
-import { useAppSelector } from '../features/hooks/reduxHooks';
-import { selectRating } from '../features/slices/moviesSlice';
-import { selectGenres } from '../features/slices/genresSlice';
-import { months } from '../features/constants';
+import { Genre, INformationAbMovie } from '../features/types';
 
 interface ISingleMovie {
-  singleMovie?: INformationAbMovie;
+  singleMovie: INformationAbMovie;
   openModal: () => void;
 }
 
@@ -91,7 +91,7 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
     if (res[res.length - 1] === ',') res.pop();
     return '$' + res.reverse().join('');
   }
-  
+
   return (
     <>
       {singleMovie && (

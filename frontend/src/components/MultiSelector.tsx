@@ -1,9 +1,11 @@
-import { MultiSelect } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
 import { fetchGenres } from '../features/slices/acyncThunck';
 import { selectGenres } from '../features/slices/genresSlice';
+
 import { IconChevronUp, IconChevronDown } from '@tabler/icons-react';
+import { MultiSelect } from '@mantine/core';
 interface MultiSelectorProps {
   setGenresId: React.Dispatch<React.SetStateAction<number[]>>;
   genres: string[] | undefined;
@@ -40,7 +42,7 @@ function MultiSelector({ setGenresId, genres, setGenres }: MultiSelectorProps) {
 
   useEffect(() => {
     dispatch(fetchGenres());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

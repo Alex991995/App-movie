@@ -31,7 +31,7 @@ export const genreSlice = createSlice({
     }
 })
 
-export const {} = genreSlice.actions;
+
 export const { selectGenres } = genreSlice.selectors;
 
 export default genreSlice.reducer;

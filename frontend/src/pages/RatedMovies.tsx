@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../features/hooks/reduxHooks';
 import { selectRating } from '../features/slices/moviesSlice';
+
 import ListOfMovies from '../components/ListOfMovies';
 import PaginationComponent from '../components/PaginationComponent';
-import styles from '../styles/RatedMovies.module.css';
-import { Button, TextInput, camelToKebabCase } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
 import EmptyState from '../components/EmptyState';
+import MovieNotFound from '../components/MovieNotFound';
+
+import styles from '../styles/RatedMovies.module.css';
+import { Button, TextInput } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
+
 
 function RatedMovies() {
   const ratedMovies = useAppSelector(selectRating);
@@ -14,9 +18,9 @@ function RatedMovies() {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState(ratedMovies);
 
-  useEffect(()=>{
-    setMovies( () => ratedMovies)
-  },[ratedMovies])
+  useEffect(() => {
+    setMovies(() => ratedMovies);
+  }, [ratedMovies]);
 
   function find() {
     setMovies(prev => prev.filter(movie => movie.original_title.includes(value)));
@@ -43,7 +47,8 @@ function RatedMovies() {
       </Button>
     );
   };
-
+  console.log(sortedMovie);
+  // MovieNotFound
   return (
     <section>
       {ratedMovies.length === 0 ? (
@@ -65,7 +70,12 @@ function RatedMovies() {
             />
           </div>
           <div className={styles.wrap}>
-            <ListOfMovies dataForListOfMovies={sortedMovie} />
+            {sortedMovie.length === 0 ? (
+              <MovieNotFound />
+            ) : (
+              <ListOfMovies dataForListOfMovies={sortedMovie} />
+            )}
+
             <PaginationComponent allPages={allPages} page={page} setPage={setPage} />
           </div>
         </>

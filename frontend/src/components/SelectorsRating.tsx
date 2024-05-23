@@ -1,6 +1,7 @@
-import { Input, Select } from '@mantine/core';
 import React, { useState } from 'react';
 import { arrNumbers } from '../features/constants';
+
+import { Input, Select } from '@mantine/core';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 
 interface SelectorsRatingProps {

@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/EmptyState.module.css';
 import pageNotFoundLogo from '../assets/pageNotFound.png';
+
 import { Button, Image } from '@mantine/core';
+import styles from '../styles/EmptyState.module.css';
 
 function NotFoundPage() {
   const navigate = useNavigate();

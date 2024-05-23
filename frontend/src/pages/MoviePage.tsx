@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../features/hooks/reduxHooks';
-import { selectOneMovie } from '../features/slices/moviesSlice';
+import { selectLoading, selectOneMovie } from '../features/slices/moviesSlice';
 import { fetchSingleMovie } from '../features/slices/acyncThunck';
+
 import styles from '../styles/MoviePage.module.css';
-import { Anchor, Breadcrumbs } from '@mantine/core';
+import { Anchor, Breadcrumbs, Loader } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+
 import SingleMovie from '../components/SingleMovie';
 import ModalComponent from '../components/ModalComponent';
 import Trailer from '../components/Trailer';
@@ -14,6 +17,7 @@ import MovieNotFound from '../components/MovieNotFound';
 function Movie() {
   const [path, setPath] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
+  const loading = useAppSelector(selectLoading);
 
   const { movie_id } = useParams();
   const dispatch = useAppDispatch();
@@ -49,7 +53,11 @@ function Movie() {
 
   return (
     <>
-      {singleMovie ? (
+      {loading ? (
+        <div className="loader">
+          <Loader size="xl" />
+        </div>
+      ) : singleMovie ? (
         <section>
           <Breadcrumbs style={{ flexWrap: 'wrap' }} mt={40}>
             {items}
@@ -60,10 +68,9 @@ function Movie() {
           </div>
         </section>
       ) : (
-        <div style={{display:  'flex', alignItems: "center", height: '100vh'}}>
+        <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
           <MovieNotFound />
         </div>
-        
       )}
       <ModalComponent movie={singleMovie} opened={opened} close={close} />
     </>

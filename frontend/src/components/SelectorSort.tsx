@@ -1,7 +1,8 @@
-import { Select } from '@mantine/core';
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { objSort } from '../features/constants';
+
+import { Select } from '@mantine/core';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import styles from '../styles/HomePage.module.css';
 
 interface SelectorSortProps {

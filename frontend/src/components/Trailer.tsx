@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { INformationAbMovie, Result } from '../features/types';
 import styles from '../styles/Trailer.module.css';
 import { AspectRatio, Divider, Image } from '@mantine/core';
