@@ -36,6 +36,16 @@ app.use(
   }),
 );
 
+app.get('/api/images/:id', async (req, res) => {
+  const id = req.params.id
+  const response = await fetch(`https://image.tmdb.org/t/p/original/${id}`)
+  console.log(response)
+  if(!response.ok) return res.send(404)
+  const result = await response.arrayBuffer()
+  res.send(Buffer.from(result) )
+})
+
+
 
 app.use(
   '/api/movies',

@@ -109,7 +109,7 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
                 w="250px"
                 h="350px"
                 fit="contain"
-                src={`https://image.tmdb.org/t/p/original/${singleMovie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original${singleMovie.poster_path}`}
                 alt="Poster Movie"
               />
             </AspectRatio>

@@ -11,7 +11,6 @@ import styles from '../styles/RatedMovies.module.css';
 import { Button, TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 
-
 function RatedMovies() {
   const ratedMovies = useAppSelector(selectRating);
   const [value, setValue] = useState('');
@@ -19,11 +18,16 @@ function RatedMovies() {
   const [movies, setMovies] = useState(ratedMovies);
 
   useEffect(() => {
-    setMovies(() => ratedMovies);
+    setMovies(ratedMovies);
   }, [ratedMovies]);
 
   function find() {
-    setMovies(prev => prev.filter(movie => movie.original_title.includes(value)));
+    const s = movies.filter(movie => {
+      const valueLowerCase = value.toLocaleLowerCase();
+      const titleLowerCase = movie.original_title.toLocaleLowerCase();
+      if (titleLowerCase.startsWith(valueLowerCase)) return true;
+    });
+    setMovies(s);
     setPage(1);
   }
 
@@ -48,7 +52,7 @@ function RatedMovies() {
     );
   };
   console.log(sortedMovie);
-  // MovieNotFound
+
   return (
     <section>
       {ratedMovies.length === 0 ? (
