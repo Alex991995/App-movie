@@ -130,7 +130,7 @@ function ListOfMovies({ dataForListOfMovies }: ListOfMoviesProps) {
                       w="120px"
                       h="170px"
                       fit="contain"
-                      src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                      src={`/api/images/${item.poster_path}`}
                       alt="Poster Movie"
                     />
                   )}

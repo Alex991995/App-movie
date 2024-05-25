@@ -6,6 +6,7 @@ import styles from '../styles/SingleMovie.module.css';
 import { AspectRatio, Image } from '@mantine/core';
 import { IconPhotoOff, IconStarFilled } from '@tabler/icons-react';
 import { Genre, INformationAbMovie } from '../features/types';
+import { useEffect, useState } from 'react';
 
 interface ISingleMovie {
   singleMovie: INformationAbMovie;
@@ -92,6 +93,7 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
     return '$' + res.reverse().join('');
   }
 
+
   return (
     <>
       {singleMovie && (
@@ -103,17 +105,17 @@ function SingleMovie({ singleMovie, openModal }: ISingleMovie) {
               </div>
               <p style={{ margin: 0 }}> No Poster</p>
             </div>
-          ) : (
+          ) : 
             <AspectRatio>
               <Image
                 w="250px"
                 h="350px"
                 fit="contain"
-                src={`https://image.tmdb.org/t/p/original${singleMovie.poster_path}`}
+                src={`/api/images/${singleMovie.poster_path}`}
                 alt="Poster Movie"
               />
             </AspectRatio>
-          )}
+          }
 
           <div className={styles.textMovie}>
             <div>

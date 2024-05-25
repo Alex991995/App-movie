@@ -1,4 +1,4 @@
-import { MantineProvider } from '@mantine/core';
+import { Image, MantineProvider } from '@mantine/core';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import HomePag from './pages/HomePage';
@@ -8,6 +8,8 @@ import RouteProvider from './features/RouteProvider';
 import NavBar from './components/NavBar';
 
 function App() {
+
+ 
   return (
     <MantineProvider>
       <RouteProvider>
