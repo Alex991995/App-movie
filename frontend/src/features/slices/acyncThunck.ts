@@ -70,13 +70,5 @@ const fetchSingleMovie = createAsyncThunk(
   }
 )
 
-const fetchImages = createAsyncThunk(
-  'movies/fetchImages',
-  async function (id:string) {
-    const response = await fetch ('api/images/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg')
-    return response
-  }
-
-)
 
 export { fetchMovies, fetchGenres, fetchSingleMovie };
